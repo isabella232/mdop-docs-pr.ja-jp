@@ -1,0 +1,110 @@
+---
+title: オフラインで GPO を編集する
+description: オフラインで GPO を編集する
+author: dansimp
+ms.assetid: 4a148952-9fe9-4ec4-8df1-b25e37c97a54
+ms.reviewer: ''
+manager: dansimp
+ms.author: dansimp
+ms.pagetype: mdop
+ms.mktglfcycl: manage
+ms.sitesec: library
+ms.prod: w10
+ms.date: 06/16/2016
+ms.openlocfilehash: 6753ad21adb810e60e0b284204a61d4dd58c2384
+ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "10820887"
+---
+# <span data-ttu-id="b42ce-103">オフラインで GPO を編集する</span><span class="sxs-lookup"><span data-stu-id="b42ce-103">Edit a GPO Offline</span></span>
+
+
+<span data-ttu-id="b42ce-104">グループポリシーオブジェクト (GPO) に変更を加えるには、まず、その GPO のコピーをアーカイブからチェックアウトする必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-104">To make changes to a controlled Group Policy object (GPO), you must first check out a copy of the GPO from the archive.</span></span> <span data-ttu-id="b42ce-105">他のユーザーは、もう一度チェックインするまで GPO を変更することはできません。これにより、複数のグループポリシー管理者による競合している変更の導入を防ぐことができます。</span><span class="sxs-lookup"><span data-stu-id="b42ce-105">No one else will be able to modify the GPO until it is checked in again, preventing the introduction of conflicting changes by multiple Group Policy administrators.</span></span> <span data-ttu-id="b42ce-106">GPO の変更が完了したら、それをアーカイブにチェックインして、運用環境に確認して展開できるようにします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-106">When you have finished modifying the GPO, you check it into the archive, so it can be reviewed and deployed to the production environment.</span></span>
+
+<span data-ttu-id="b42ce-107">この手順を完了するには、Editor または AGPM 管理者 (フルコントロール) の役割を持つユーザーアカウント、または高度なグループポリシー管理で必要なアクセス許可を持つユーザーアカウントを使用する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-107">A user account with the Editor or AGPM Administrator (Full Control) role, the user account of the Approver who created the GPO, or a user account with the necessary permissions in Advanced Group Policy Management is required to complete this procedure.</span></span> <span data-ttu-id="b42ce-108">詳細については、このトピックの「その他の考慮事項」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="b42ce-108">Review the details in "Additional considerations" in this topic.</span></span>
+
+## <span data-ttu-id="b42ce-109">GPO をオフラインで編集する</span><span class="sxs-lookup"><span data-stu-id="b42ce-109">Editing a GPO offline</span></span>
+
+
+<span data-ttu-id="b42ce-110">GPO を編集するには、アーカイブから GPO をチェックアウトして、オフラインでその gpo を編集してから、GPO をアーカイブにチェックインして、その GPO が確認および展開されるようにします (他のエディターによって変更された場合)。</span><span class="sxs-lookup"><span data-stu-id="b42ce-110">To edit a GPO, you check out the GPO from the archive, edit the GPO offline, and then check the GPO into the archive, so it can be reviewed and deployed (or modified by other Editors).</span></span>
+
+-   [<span data-ttu-id="b42ce-111">GPO をチェックアウトする</span><span class="sxs-lookup"><span data-stu-id="b42ce-111">Check out a GPO</span></span>](#bkmk-checkout)
+
+-   [<span data-ttu-id="b42ce-112">GPO を編集する</span><span class="sxs-lookup"><span data-stu-id="b42ce-112">Edit a GPO</span></span>](#bkmk-edit)
+
+-   [<span data-ttu-id="b42ce-113">GPO をチェックインする</span><span class="sxs-lookup"><span data-stu-id="b42ce-113">Check in a GPO</span></span>](#bkmk-checkin)
+
+### <a href="" id="bkmk-checkout"></a>
+
+**<span data-ttu-id="b42ce-114">アーカイブから GPO をチェックアウトして編集するには</span><span class="sxs-lookup"><span data-stu-id="b42ce-114">To check out a GPO from the archive for editing</span></span>**
+
+1.  <span data-ttu-id="b42ce-115">[**グループポリシー管理コンソール**] ツリーで、gpo を管理するフォレストとドメインの [ **Change Control** ] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-115">In the **Group Policy Management Console** tree, click **Change Control** in the forest and domain in which you want to manage GPOs.</span></span>
+
+2.  <span data-ttu-id="b42ce-116">[詳細] ウィンドウの [**コンテンツ**] タブで、[**コントロール**] タブをクリックして、管理されている gpo を表示します。</span><span class="sxs-lookup"><span data-stu-id="b42ce-116">On the **Contents** tab in the details pane, click the **Controlled** tab to display the controlled GPOs.</span></span>
+
+3.  <span data-ttu-id="b42ce-117">編集する GPO を右クリックし、[チェックアウト] をクリック**します。**</span><span class="sxs-lookup"><span data-stu-id="b42ce-117">Right-click the GPO to be edited, and then click **Check Out**.</span></span>
+
+4.  <span data-ttu-id="b42ce-118">チェックアウトされているときに、GPO の履歴に表示されるコメントを入力して、[ **OK]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-118">Type a comment to be displayed in the History of the GPO while it is checked out, then click **OK**.</span></span>
+
+5.  <span data-ttu-id="b42ce-119">**進行**状況ウィンドウで全体の進行状況が完了したことが示されたら、[**閉じる**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-119">When the **Progress** window indicates that overall progress is complete, click **Close**.</span></span> <span data-ttu-id="b42ce-120">[**コントロール**] タブで、GPO の状態が**チェックアウト済み**として識別されるようになりました。</span><span class="sxs-lookup"><span data-stu-id="b42ce-120">On the **Controlled** tab, the state of the GPO is now identified as **Checked Out**.</span></span>
+
+### <a href="" id="bkmk-edit"></a>
+
+**<span data-ttu-id="b42ce-121">GPO をオフラインで編集するには</span><span class="sxs-lookup"><span data-stu-id="b42ce-121">To edit a GPO offline</span></span>**
+
+1.  <span data-ttu-id="b42ce-122">[**コントロール**] タブで、編集する GPO を右クリックし、[**編集**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-122">On the **Controlled** tab, right-click the GPO to be edited, and then click **Edit**.</span></span>
+
+2.  <span data-ttu-id="b42ce-123">**グループポリシーオブジェクトエディター**で、GPO のオフラインコピーに変更を加えます。</span><span class="sxs-lookup"><span data-stu-id="b42ce-123">In the **Group Policy Object Editor**, make changes to an offline copy of the GPO.</span></span>
+
+3.  <span data-ttu-id="b42ce-124">GPO の変更が完了したら、**グループポリシーオブジェクトエディター**を閉じます。</span><span class="sxs-lookup"><span data-stu-id="b42ce-124">When you have finished modifying the GPO, close the **Group Policy Object Editor**.</span></span>
+
+### <a href="" id="bkmk-checkin"></a>
+
+**<span data-ttu-id="b42ce-125">GPO をアーカイブにチェックインするには</span><span class="sxs-lookup"><span data-stu-id="b42ce-125">To check a GPO into the archive</span></span>**
+
+1.  <span data-ttu-id="b42ce-126">[**コントロール**] タブで、次の操作を行います。</span><span class="sxs-lookup"><span data-stu-id="b42ce-126">On the **Controlled** tab:</span></span>
+
+    -   <span data-ttu-id="b42ce-127">GPO に変更を加えていない場合は、GPO を右クリックし、[**元に戻す**] をクリックします。次に、[**はい**] をクリックして確認します。</span><span class="sxs-lookup"><span data-stu-id="b42ce-127">If you have made no changes to the GPO, right-click the GPO and click **Undo Check Out**, then click **Yes** to confirm.</span></span>
+
+    -   <span data-ttu-id="b42ce-128">GPO に変更を加えた場合は、その GPO を右クリックして [**チェックイン**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-128">If you have made changes to the GPO, right-click the GPO and click **Check In**.</span></span>
+
+2.  <span data-ttu-id="b42ce-129">GPO の監査トレールに表示されるコメントを入力し、[ **OK]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-129">Type a comment to be displayed in the audit trail of the GPO, and then click **OK**.</span></span>
+
+3.  <span data-ttu-id="b42ce-130">**進行**状況ウィンドウで全体の進行状況が完了したことが示されたら、[**閉じる**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="b42ce-130">When the **Progress** window indicates that overall progress is complete, click **Close**.</span></span> <span data-ttu-id="b42ce-131">[**コントロール**] タブでは、GPO の状態は**チェックイン済み**として識別されます。</span><span class="sxs-lookup"><span data-stu-id="b42ce-131">On the **Controlled** tab, the state of the GPO is identified as **Checked In**.</span></span>
+
+### <span data-ttu-id="b42ce-132">その他の考慮事項</span><span class="sxs-lookup"><span data-stu-id="b42ce-132">Additional considerations</span></span>
+
+-   <span data-ttu-id="b42ce-133">GPO をチェックアウトして編集するには、既定で、GPO、エディター、または AGPM 管理者 (フルコントロール) を作成または管理する承認者である必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-133">To check out and edit a GPO, by default, you must be the Approver who created or controlled the GPO, an Editor, or an AGPM Administrator (Full Control).</span></span> <span data-ttu-id="b42ce-134">具体的には、GPO の [**リストコンテンツ]** と [**編集設定**] のアクセス許可が必要です。</span><span class="sxs-lookup"><span data-stu-id="b42ce-134">Specifically, you must have **List Contents** and **Edit Settings** permissions for the GPO.</span></span> <span data-ttu-id="b42ce-135">さらに、GPO を編集するには、GPO をチェックアウトした個人である必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-135">Additionally, to edit the GPO you must be the individual who has checked out the GPO.</span></span>
+
+-   <span data-ttu-id="b42ce-136">GPO をチェックインするには、既定で、編集者、承認者、または AGPM 管理者 (フルコントロール) である必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-136">To check in a GPO, by default, you must be an Editor, an Approver, or an AGPM Administrator (Full Control).</span></span> <span data-ttu-id="b42ce-137">具体的には、その GPO の [**コンテンツの一覧]** と [**設定の編集**] または [gpo のアクセス許可の**展開**] を行う必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-137">Specifically, you must have **List Contents** and either **Edit Settings** or **Deploy GPO** permissions for the GPO.</span></span> <span data-ttu-id="b42ce-138">承認者または AGPM 管理者 (または**gpo の展開**に関するその他のグループポリシー管理者) ではない場合は、gpo をチェックアウトしたエディターである必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-138">If you are not an Approver or AGPM Administrator (or other Group Policy administrator with **Deploy GPO** permission), you must be the Editor who has checked out the GPO.</span></span>
+
+-   <span data-ttu-id="b42ce-139">GPO を編集する場合、別の GPO にあるパッケージのグループポリシーソフトウェアのインストールアップグレードは、チェックアウトしたコピーではなく、展開された GPO を参照する必要があります。</span><span class="sxs-lookup"><span data-stu-id="b42ce-139">When editing a GPO, any Group Policy Software Installation upgrade of a package in another GPO should reference the deployed GPO, not the checked-out copy.</span></span>
+
+### <span data-ttu-id="b42ce-140">その他の参照情報</span><span class="sxs-lookup"><span data-stu-id="b42ce-140">Additional references</span></span>
+
+-   [<span data-ttu-id="b42ce-141">GPO の編集</span><span class="sxs-lookup"><span data-stu-id="b42ce-141">Editing a GPO</span></span>](editing-a-gpo.md)
+
+-   <span data-ttu-id="b42ce-142">GPO を確認する</span><span class="sxs-lookup"><span data-stu-id="b42ce-142">Reviewing a GPO</span></span>
+
+    -   [<span data-ttu-id="b42ce-143">GPO の設定を確認する</span><span class="sxs-lookup"><span data-stu-id="b42ce-143">Review GPO Settings</span></span>](review-gpo-settings.md)
+
+    -   [<span data-ttu-id="b42ce-144">GPO のリンクを確認する</span><span class="sxs-lookup"><span data-stu-id="b42ce-144">Review GPO Links</span></span>](review-gpo-links.md)
+
+    -   [<span data-ttu-id="b42ce-145">GPO、GPO のバージョン、またはテンプレート間の相違点を識別する</span><span class="sxs-lookup"><span data-stu-id="b42ce-145">Identify Differences Between GPOs, GPO Versions, or Templates</span></span>](identify-differences-between-gpos-gpo-versions-or-templates.md)
+
+-   <span data-ttu-id="b42ce-146">GPO の展開</span><span class="sxs-lookup"><span data-stu-id="b42ce-146">Deploying a GPO</span></span>
+
+    -   [<span data-ttu-id="b42ce-147">GPO の展開を要求する</span><span class="sxs-lookup"><span data-stu-id="b42ce-147">Request Deployment of a GPO</span></span>](request-deployment-of-a-gpo.md)
+
+    -   [<span data-ttu-id="b42ce-148">GPO を展開する</span><span class="sxs-lookup"><span data-stu-id="b42ce-148">Deploy a GPO</span></span>](deploy-a-gpo.md)
+
+ 
+
+ 
+
+
+
+
+

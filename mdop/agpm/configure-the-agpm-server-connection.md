@@ -1,0 +1,122 @@
+---
+title: AGPM サーバー接続を構成する
+description: AGPM サーバー接続を構成する
+author: dansimp
+ms.assetid: 9a42b5bc-41be-44ef-a6e2-6f56e2cf1996
+ms.reviewer: ''
+manager: dansimp
+ms.author: dansimp
+ms.pagetype: mdop
+ms.mktglfcycl: manage
+ms.sitesec: library
+ms.prod: w10
+ms.date: 06/16/2016
+ms.openlocfilehash: 88182f0e79f1a8bcce53e0d50c014e8d4aa29286
+ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "10818914"
+---
+# <span data-ttu-id="7ad91-103">AGPM サーバー接続を構成する</span><span class="sxs-lookup"><span data-stu-id="7ad91-103">Configure the AGPM Server Connection</span></span>
+
+
+<span data-ttu-id="7ad91-104">高度なグループポリシー管理 (AGPM) では、各グループポリシーオブジェクト (GPO) のすべてのバージョンが中央のアーカイブに保存されるため、グループポリシー管理者は、展開されたバージョンの各 GPO に影響を与えることなく、オフラインで Gpo を表示して変更することができます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-104">Advanced Group Policy Management (AGPM) stores all versions of each controlled Group Policy object (GPO) in a central archive, so Group Policy administrators can view and modify GPOs offline without immediately impacting the deployed version of each GPO.</span></span>
+
+<span data-ttu-id="7ad91-105">AGPM 管理者 (フルコントロール) の役割を持つユーザーアカウント、これらの手順で使用されている GPO を作成した承認者のユーザーアカウント、または高度なグループポリシー管理で必要なアクセス許可を持つユーザーアカウントは、すべてのグループポリシー管理者のアーカイブ場所を一元的に構成するための手順を実行する必要があります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-105">A user account with the AGPM Administrator (Full Control) role, the user account of the Approver who created the GPO used in these procedures, or a user account with the necessary permissions in Advanced Group Policy Management is required to complete these procedures for centrally configuring archive locations for all Group Policy administrators.</span></span> <span data-ttu-id="7ad91-106">詳細については、このトピックの「その他の考慮事項」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad91-106">Review the details in "Additional considerations" in this topic.</span></span>
+
+## <span data-ttu-id="7ad91-107">AGPM サーバー接続を構成する</span><span class="sxs-lookup"><span data-stu-id="7ad91-107">Configuring the AGPM Server connection</span></span>
+
+
+<span data-ttu-id="7ad91-108">AGPM 管理者 (フルコントロール) として、すべてのグループポリシー管理者が、設定を一元的に構成して、同じ AGPM サーバーに接続するようにすることができます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-108">As an AGPM Administrator (Full Control), you can ensure that all Group Policy administrators connect to the same AGPM Server by centrally configuring the setting.</span></span> <span data-ttu-id="7ad91-109">環境で、一部またはすべてのドメインに別個の AGPM サーバーが必要な場合は、これらの追加の AGPM サーバーを既定の例外として構成します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-109">If your environment requires separate AGPM Servers for some or all domains, configure those additional AGPM Servers as exceptions to the default.</span></span> <span data-ttu-id="7ad91-110">AGPM サーバー接続を一元的に構成しない場合、各グループポリシー管理者は、各ドメインに対して表示される AGPM サーバーを手動で構成する必要があります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-110">If you do not centrally configure AGPM Server connections, each Group Policy administrator must manually configure the AGPM Server to be displayed for each domain.</span></span>
+
+-   [<span data-ttu-id="7ad91-111">すべてのグループポリシー管理者に対して AGPM サーバーを構成する</span><span class="sxs-lookup"><span data-stu-id="7ad91-111">Configure an AGPM Server for all Group Policy administrators</span></span>](#bkmk-defaultarchiveloc)
+
+-   [<span data-ttu-id="7ad91-112">すべてのグループポリシー管理者に対して追加の AGPM サーバーを構成する</span><span class="sxs-lookup"><span data-stu-id="7ad91-112">Configure additional AGPM Servers for all Group Policy administrators</span></span>](#bkmk-additionalarchiveloc)
+
+-   [<span data-ttu-id="7ad91-113">アカウントの AGPM サーバーを手動で構成する</span><span class="sxs-lookup"><span data-stu-id="7ad91-113">Manually configure an AGPM Server for your account</span></span>](#bkmk-manuallyconfigurearchiveloc)
+
+### <a href="" id="bkmk-defaultarchiveloc"></a>
+
+**<span data-ttu-id="7ad91-114">すべてのグループポリシー管理者に対して AGPM サーバーを構成するには</span><span class="sxs-lookup"><span data-stu-id="7ad91-114">To configure an AGPM Server for all Group Policy administrators</span></span>**
+
+1.  <span data-ttu-id="7ad91-115">[**グループポリシー管理コンソール**] ツリーで、すべてのグループポリシー管理者に適用される GPO を編集します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-115">In the **Group Policy Management Console** tree, edit a GPO that is applied to all Group Policy administrators.</span></span> <span data-ttu-id="7ad91-116">詳細については、「 [GPO を編集する](editing-a-gpo.md)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad91-116">(For more information, see [Editing a GPO](editing-a-gpo.md).)</span></span>
+
+2.  <span data-ttu-id="7ad91-117">**グループポリシーオブジェクトエディター**で、[**ユーザーの構成**]、[**管理用テンプレート**]、[ **Windows コンポーネント**] の順番にクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-117">In the **Group Policy Object Editor**, click **User Configuration**, **Administrative Templates**, and **Windows Components**.</span></span>
+
+3.  <span data-ttu-id="7ad91-118">[ **Windows コンポーネント**] の下に [ **AGPM** ] が表示されない場合:</span><span class="sxs-lookup"><span data-stu-id="7ad91-118">If **AGPM** is not listed under **Windows Components**:</span></span>
+
+    1.  <span data-ttu-id="7ad91-119">[**管理用テンプレート**] を右クリックし、[**テンプレートの追加と削除**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-119">Right-click **Administrative Templates** and click **Add/Remove Templates**.</span></span>
+
+    2.  <span data-ttu-id="7ad91-120">[**追加**] をクリックして、[ **agpm** ] または [ **agpm**] を選択し、[**開く**] をクリックして、[**閉じる**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-120">Click **Add**, select **agpm.admx** or **agpm.adm**, click **Open**, and then click **Close**.</span></span>
+
+4.  <span data-ttu-id="7ad91-121">[ **Windows コンポーネント**] で、[ **AGPM**] をダブルクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-121">Under **Windows Components**, double-click **AGPM**.</span></span>
+
+5.  <span data-ttu-id="7ad91-122">詳細ウィンドウで、[ **AGPM サーバー (すべてのドメイン)**] をダブルクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-122">In the details pane, double-click **AGPM Server (all domains)**.</span></span>
+
+6.  <span data-ttu-id="7ad91-123">[ **AGPM Server (すべてのドメイン) のプロパティ**] ウィンドウで、[**有効**] チェックボックスをオンにし、完全修飾コンピューター名とポート (たとえば、server.contoso.com:4600) を入力します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-123">In the **AGPM Server (all domains) Properties** window, select the **Enabled** check box, and type the fully-qualified computer name and port (for example, server.contoso.com:4600).</span></span>
+
+7.  <span data-ttu-id="7ad91-124">**[OK]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-124">Click **OK**.</span></span> <span data-ttu-id="7ad91-125">追加の AGPM サーバー接続を構成する場合を除き、**グループポリシーオブジェクトエディター**を閉じて、GPO を展開します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-125">Unless you want to configure additional AGPM Server connections, close the **Group Policy Object Editor** and deploy the GPO.</span></span> <span data-ttu-id="7ad91-126">(詳細については、「 [GPO の展開](deploy-a-gpo.md)」を参照してください)。グループポリシーが更新されると、すべてのグループポリシーの管理者に対して AGPM サーバー接続が構成されます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-126">(For more information, see [Deploy a GPO](deploy-a-gpo.md).) When Group Policy is updated, the AGPM Server connection is configured for all Group Policy administrators.</span></span>
+
+### <a href="" id="bkmk-additionalarchiveloc"></a>
+
+**<span data-ttu-id="7ad91-127">すべてのグループポリシー管理者に対して追加の AGPM サーバーを構成するには</span><span class="sxs-lookup"><span data-stu-id="7ad91-127">To configure additional AGPM Servers for all Group Policy administrators</span></span>**
+
+1.  <span data-ttu-id="7ad91-128">AGPM サーバー接続が構成されていない場合は、上記の手順に従って、すべてのドメインに対して既定の AGPM サーバーを構成します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-128">If no AGPM Server connection has been configured, follow the preceding procedure to configure a default AGPM Server for all domains.</span></span>
+
+2.  <span data-ttu-id="7ad91-129">一部またはすべてのドメイン (既定の AGPM サーバーを上書きします) に対して別個の AGPM サーバーを構成するには、[**グループポリシー管理コンソール**] ツリーで、すべてのグループポリシー管理者に適用される GPO を編集します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-129">To configure separate AGPM Servers for some or all domains (overriding the default AGPM Server), in the **Group Policy Management Console** tree, edit a GPO that is applied to all Group Policy administrators.</span></span> <span data-ttu-id="7ad91-130">詳細については、「 [GPO を編集する](editing-a-gpo.md)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad91-130">(For more information, see [Editing a GPO](editing-a-gpo.md).)</span></span>
+
+3.  <span data-ttu-id="7ad91-131">**グループポリシーオブジェクトエディター**の [**ユーザーの構成**] で、[**管理用テンプレート**]、[ **Windows コンポーネント**]、[ **AGPM**] の順にダブルクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-131">Under **User Configuration** in the **Group Policy Object Editor**, double-click **Administrative Templates**, **Windows Components**, and then **AGPM**.</span></span>
+
+4.  <span data-ttu-id="7ad91-132">詳細ウィンドウで、[ **AGPM サーバー**] をダブルクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-132">In the details pane, double-click **AGPM Server**.</span></span>
+
+5.  <span data-ttu-id="7ad91-133">**AGPM サーバーのプロパティ**ウィンドウで、[**有効**] チェックボックスをオンにし、[**表示**] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-133">In the **AGPM Server Properties** window, select the **Enabled** check box, and click **Show**.</span></span>
+
+6.  <span data-ttu-id="7ad91-134">[**コンテンツの表示**] ウィンドウで、次の操作を行います。</span><span class="sxs-lookup"><span data-stu-id="7ad91-134">In the **Show Contents** window:</span></span>
+
+    1.  <span data-ttu-id="7ad91-135">**[追加]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-135">Click **Add**.</span></span>
+
+    2.  <span data-ttu-id="7ad91-136">[**値の名前**] には、ドメイン名 (server1.contoso.com など) を入力します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-136">For **Value Name**, type the domain name (for example, server1.contoso.com).</span></span>
+
+    3.  <span data-ttu-id="7ad91-137">**値**には、このドメインに使用する AGPM サーバー名とポート (たとえば、server2.contoso.com:4600) を入力して、[ **OK]** をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-137">For **Value**, type the AGPM Server name and port to use for this domain (for example, server2.contoso.com:4600), and then click **OK**.</span></span> <span data-ttu-id="7ad91-138">(既定では、AGPM サービスはポート4600をリッスンします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-138">(By default, the AGPM Service listens on port 4600.</span></span> <span data-ttu-id="7ad91-139">別のポートを使用するには、「 [AGPM サービスがリッスンするポートの変更](modify-the-port-on-which-the-agpm-service-listens.md)」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad91-139">To use a different port, see [Modify the Port on Which the AGPM Service Listens](modify-the-port-on-which-the-agpm-service-listens.md).)</span></span>
+
+    4.  <span data-ttu-id="7ad91-140">既定の AGPM サーバーを使用しないドメインごとに、この手順を繰り返します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-140">Repeat for each domain not using the default AGPM Server.</span></span>
+
+7.  <span data-ttu-id="7ad91-141">[ **OK** ] をクリックして、[**コンテンツの表示**] と [ **AGPM サーバーのプロパティ**] ウィンドウを閉じます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-141">Click **OK** to close the **Show Contents** and **AGPM Server Properties** windows.</span></span>
+
+8.  <span data-ttu-id="7ad91-142">**グループポリシーオブジェクトエディター**を閉じます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-142">Close the **Group Policy Object Editor**.</span></span> <span data-ttu-id="7ad91-143">(詳細については、「 [GPO の展開](deploy-a-gpo.md)」を参照してください)。グループポリシーが更新されると、すべてのグループポリシーの管理者に対して新しい AGPM サーバー接続が構成されます。</span><span class="sxs-lookup"><span data-stu-id="7ad91-143">(For more information, see [Deploy a GPO](deploy-a-gpo.md).) When Group Policy is updated, the new AGPM Server connections are configured for all Group Policy administrators.</span></span>
+
+### <a href="" id="bkmk-manuallyconfigurearchiveloc"></a>
+
+<span data-ttu-id="7ad91-144">AGPM サーバー接続を一元的に構成している場合、すべてのグループポリシー管理者が手動でこのオプションを使用することはできません。</span><span class="sxs-lookup"><span data-stu-id="7ad91-144">If you have centrally configured the AGPM Server connection, the option to manually it is unavailable for all Group Policy administrators.</span></span>
+
+**<span data-ttu-id="7ad91-145">アカウントに対して表示する AGPM サーバーを手動で構成するには</span><span class="sxs-lookup"><span data-stu-id="7ad91-145">To manually configure the AGPM Server to display for your account</span></span>**
+
+1.  <span data-ttu-id="7ad91-146">[**グループポリシー管理コンソール**] ツリーで、gpo を管理するフォレストとドメインの [ **Change Control** ] をクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-146">In the **Group Policy Management Console** tree, click **Change Control** in the forest and domain in which you want to manage GPOs.</span></span>
+
+2.  <span data-ttu-id="7ad91-147">詳細ウィンドウで、[ **AGPM サーバー** ] タブをクリックします。</span><span class="sxs-lookup"><span data-stu-id="7ad91-147">In the details pane, click the **AGPM Server** tab.</span></span>
+
+3.  <span data-ttu-id="7ad91-148">このドメイン (たとえば、server.contoso.com) で使用されているアーカイブと、AGPM サービスがリッスンするポート (既定では、ポート 4600) を管理する AGPM サーバーの完全修飾コンピューター名を入力します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-148">Enter the fully-qualified computer name for the AGPM Server that manages the archive used for this domain (for example, server.contoso.com) and the port on which the AGPM Service listens (by default, port 4600).</span></span>
+
+4.  <span data-ttu-id="7ad91-149">[**適用**] をクリックし、[**はい**] をクリックして確認します。</span><span class="sxs-lookup"><span data-stu-id="7ad91-149">Click **Apply**, then click **Yes** to confirm.</span></span>
+
+### <span data-ttu-id="7ad91-150">その他の考慮事項</span><span class="sxs-lookup"><span data-stu-id="7ad91-150">Additional considerations</span></span>
+
+-   <span data-ttu-id="7ad91-151">すべてのグループポリシーの管理者に対して、AGPM サーバー接続を一元的に構成するための手順を実行するには、GPO の編集と展開が可能である必要があります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-151">You must be able to edit and deploy a GPO to perform the procedures for centrally configuring AGPM Server connections for all Group Policy administrators.</span></span> <span data-ttu-id="7ad91-152">詳細については、「 [gpo を編集](editing-a-gpo.md)する」と「 [gpo を展開](deploy-a-gpo.md)する」を参照してください。</span><span class="sxs-lookup"><span data-stu-id="7ad91-152">See [Editing a GPO](editing-a-gpo.md) and [Deploy a GPO](deploy-a-gpo.md) for additional detail.</span></span>
+
+-   <span data-ttu-id="7ad91-153">選択された AGPM サーバーによって、[**コンテンツ**] タブに表示される gpo と、[**ドメイン委任**] タブの設定が適用される場所が決まります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-153">The AGPM Server selected determines which GPOs are displayed on the **Contents** tab and to what location the **Domain Delegation** tab settings are applied.</span></span> <span data-ttu-id="7ad91-154">管理用テンプレートで一元管理されていない場合は、各グループポリシー管理者がこの設定を構成して、ドメインの AGPM サーバーを指すようにする必要があります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-154">If not centrally managed through the Administrative Template, each Group Policy administrator must configure this setting to point to the AGPM Server for the domain.</span></span>
+
+-   <span data-ttu-id="7ad91-155">グループポリシー Creator Owners グループのメンバーシップは、AGPM による Gpo へのアクセスの管理を回避するために使用されないように制限されている必要があります。</span><span class="sxs-lookup"><span data-stu-id="7ad91-155">Membership in the Group Policy Creator Owners group should be restricted so that it is not used to circumvent the management of access to GPOs by AGPM.</span></span> <span data-ttu-id="7ad91-156">(**グループポリシー管理コンソール**で、gpo を管理するフォレストとドメインの [**グループポリシーオブジェクト**] をクリックし、[**委任**] をクリックして、組織のニーズに合わせて設定を構成します)。</span><span class="sxs-lookup"><span data-stu-id="7ad91-156">(In the **Group Policy Management Console**, click **Group Policy Objects** in the forest and domain in which you want to manage GPOs, click **Delegation**, and then configure the settings to meet the needs of your organization.)</span></span>
+
+### <span data-ttu-id="7ad91-157">その他の参照情報</span><span class="sxs-lookup"><span data-stu-id="7ad91-157">Additional references</span></span>
+
+-   [<span data-ttu-id="7ad91-158">AGPM 管理者タスクの実行</span><span class="sxs-lookup"><span data-stu-id="7ad91-158">Performing AGPM Administrator Tasks</span></span>](performing-agpm-administrator-tasks.md)
+
+ 
+
+ 
+
+
+
+
+

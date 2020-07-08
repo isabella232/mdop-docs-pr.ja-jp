@@ -1,0 +1,56 @@
+---
+title: Sequencer をインストールする方法
+description: Sequencer をインストールする方法
+author: dansimp
+ms.assetid: 2cd16427-a0ba-4870-82d1-3e3c79e1959b
+ms.reviewer: ''
+manager: dansimp
+ms.author: dansimp
+ms.pagetype: mdop, appcompat, virtualization
+ms.mktglfcycl: deploy
+ms.sitesec: library
+ms.prod: w10
+ms.date: 06/16/2016
+ms.openlocfilehash: 75a0f987fcc76d1ed92631085a4364ae6e06c9ce
+ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.translationtype: MT
+ms.contentlocale: ja-JP
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "10817267"
+---
+# Sequencer をインストールする方法
+
+
+Microsoft Application Virtualization (App-v) Sequencer は、アプリケーションを仮想アプリケーションとして実行できるように、アプリケーションのインストールとセットアップのプロセスを監視および記録します。 オペレーティングシステムのみがインストールされているコンピューターに Sequencer をインストールする必要があります。 または、仮想環境を実行しているコンピューター (Microsoft Virtual PC など) に Sequencer をインストールすることもできます。 この方法は、最小限の追加構成で再利用できるクリーンなシーケンス環境を維持するのが簡単なため便利です。
+
+アプリケーションのシーケンスに使用しているコンピューターの管理者権限が必要であり、コンピューターがネットワークに接続されている必要があります。 このコンピューターでは、Application Virtualization (App-v) クライアントのいずれかのバージョンを実行していない必要があります。 Sequencer を使用した仮想アプリケーションの作成はリソースを大量に消費するため、推奨された要件を満たしている、または超えているコンピューターに Sequencer をインストールすることが重要です。 システム要件の詳細については、「 [Sequencer のハードウェア要件とソフトウェア要件](sequencer-hardware-and-software-requirements.md)」を参照してください。
+
+**Microsoft Application Virtualization Sequencer をインストールするには**
+
+1.  Microsoft Application Virtualization Sequencer インストールファイルをインストールするコンピューターにコピーします。
+
+2.  Microsoft Application Virtualization Sequencer のインストールウィザードを開始するには、[ **setup.exe**] を選びます。 **Microsoft Visual C++ SP1 の再頒布可能パッケージ (x86)** がインストール前に検出されない場合は、 **setup.exe**によってインストールされます。
+
+3.  [**ようこそ**] ページで、[**次へ**] をクリックします。
+
+4.  [**使用**許諾契約書] ページで、使用許諾契約書に同意する場合は、[**使用許諾契約書に同意**します] を選択します。 **[次へ]** をクリックします。
+
+5.  [**インポート先のフォルダー** ] ページで、既定のインストールフォルダーを承認するには、[**次へ**] をクリックします。 別の保存先フォルダーを指定するには、[**変更**] をクリックし、インストールに使用するインストールフォルダーを指定します。 **[次へ]** をクリックします。
+
+6.  [**プログラムをインストールする準備ができ**ました] ページで、インストールを開始するには、[**インストール**] をクリックします。
+
+7.  **InstallShield ウィザード**の [完了] ページで、インストールウィザードを閉じて Sequencer を開くには、[**完了**] をクリックします。 Sequencer を開かずにインストールウィザードを閉じるには、[**プログラムの起動**] をオフにし、[**完了**] をクリックします。
+
+## 関連トピック
+
+
+[Application Virtualization Sequencer の構成](configuring-the-application-virtualization-sequencer.md)
+
+ 
+
+ 
+
+
+
+
+

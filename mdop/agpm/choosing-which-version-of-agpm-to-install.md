@@ -11,12 +11,12 @@ ms.mktglfcycl: manage
 ms.sitesec: library
 ms.prod: w10
 ms.date: 04/05/2017
-ms.openlocfilehash: b09ea8161b6801c62552f1c0d0ef8455dc111e2f
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: f8a69fb323d9f47c5b906ac3abc6ec59376ee6f7
+ms.sourcegitcommit: 0a7dee11289780336d9c24ebbf27c5c1ffee441c
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10819097"
+ms.lasthandoff: 08/04/2020
+ms.locfileid: "10905604"
 ---
 # インストールする AGPM のバージョンの選択
 
@@ -53,42 +53,47 @@ Windows 10 を実行しているコンピューターで Gpo を管理してい�
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><p>Windows Server 2016 または Windows 10</p></td>
-<td align="left"><p>Windows Server 2016 または Windows 10</p></td>
+<td align="left"><p>Windows Server 2019 または Windows 10</p></td>
+<td align="left"><p>Windows Server 2019 または Windows 10</p></td>
 <td align="left"><p>サポートされています</p></td>
 </tr>
-<tr class="even">
+ <tr class="even">
+<td align="left"><p>Windows Server 2019 または Windows 10</p></td>
+<td align="left"><p>Windows Server 2019 または Windows 10</p></td>
+<td align="left"><p>サポートされています</p></td>
+</tr>
+<tr class="edd">
 <td align="left"><p>Windows Server2012 R2</p></td>
 <td align="left"><p>Windows 10</p></td>
 <td align="left"><p>KB 4015786 で説明されている警告でサポートされています <a href="https://support.microsoft.com/help/4015786/known-issues-managing-a-windows-10-group-policy-client-in-windows-serv" data-raw-source="[KB 4015786](https://support.microsoft.com/help/4015786/known-issues-managing-a-windows-10-group-policy-client-in-windows-serv)"></a>
 </p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><p>Windows Server2012 R2 または Windows 8.1</p></td>
 <td align="left"><p>Windows Server2012 R2 または Windows 8.1</p></td>
 <td align="left"><p>サポートされています</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><p>Windows Server2012 R2、Windows Server 2012、または Windows 8.1</p></td>
 <td align="left"><p>Windows Server 2012 または Windows 8.1</p></td>
 <td align="left"><p>サポートされますが、Windows 8.1 でのみ存在するポリシー設定や設定項目は編集できません。</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><p>Windows Server2008R2 または Windows7</p></td>
 <td align="left"><p>Windows Server2008R2 または Windows7</p></td>
 <td align="left"><p>サポートされますが、Windows 8.1 でのみ存在するポリシー設定や設定項目は編集できません。</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><p>Windows Server 2012、Windows Server2008R2、または Windows7</p></td>
 <td align="left"><p>Windows Server2008 または Windows Vista Service Pack 1 (SP1)</p></td>
 <td align="left"><p>サポートされますが、windows Server2012 R2、Windows Server 2012、Windows Server2008R2、Windows 8.1、または Windows7 でのみ存在するポリシー設定や環境設定項目は編集できません。</p></td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left"><p>Windows Server2008 または Windows Vista SP1</p></td>
 <td align="left"><p>Windows Server 2012、Windows Server2008R2、Windows 8、または Windows7</p></td>
 <td align="left"><p>サポートされていないアプリ</p></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left"><p>Windows Server2008 または Windows Vista SP1</p></td>
 <td align="left"><p>Windows Server2008 または Windows Vista SP1</p></td>
 <td align="left"><p>サポートされますが、windows Server2012 R2、Windows Server 2012、Windows Server2008R2、Windows 8.1、または Windows7 でのみ存在するポリシー設定や基本設定項目は報告または編集できません。</p></td>

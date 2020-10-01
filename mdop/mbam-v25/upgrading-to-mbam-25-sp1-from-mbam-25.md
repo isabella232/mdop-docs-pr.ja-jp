@@ -11,12 +11,12 @@ ms.mktglfcycl: manage
 ms.sitesec: library
 ms.prod: w10
 ms.date: 2/16/2018
-ms.openlocfilehash: 19da3df0976b51700e0d10c302a31421a88d17e4
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: 330ded822dd9da96a1c33eabcb31d744044dc28e
+ms.sourcegitcommit: ae34c5cb5e7979b472b257a4691142e493d5d6fe
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10812746"
+ms.lasthandoff: 09/30/2020
+ms.locfileid: "11091622"
 ---
 # MBAM 2.5 から MBAM 2.5 SP1 へのアップグレード
 このトピックでは、Microsoft BitLocker 管理および監視 (MBAM) サーバー2.5 と MBAM クライアントを2.5 から MBAM 2.5 SP1 にアップグレードするプロセスについて説明します。
@@ -24,6 +24,10 @@ ms.locfileid: "10812746"
 ### 始める前に
 #### 2019年5月のサービスリリースをダウンロードする
 [デスクトップ最適化パック](https://www.microsoft.com/download/details.aspx?id=58345)
+
+#### 2018年7月のサービスリリースをダウンロードする
+[デスクトップ最適化パック](https://www.microsoft.com/download/details.aspx?id=57157)
+
 
 #### インストールドキュメントを確認する
 すべてのサーバー名、データベース名、サービスアカウント、パスワードなど、MBAM 環境の最新ドキュメントがあることを確認します。

@@ -11,29 +11,29 @@ ms.mktglfcycl: manage
 ms.sitesec: library
 ms.prod: w10
 ms.date: 10/24/2018
-ms.openlocfilehash: 262cd8c259dc37b291cdaf02caf0e20b7515d38b
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: 8ed7915e33c5e4735a7c58674ed5f7d6da8e9a06
+ms.sourcegitcommit: 9087f0a1b5bd3f81a9b790d5e39fdf39c18a2411
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10823894"
+ms.lasthandoff: 11/23/2020
+ms.locfileid: "11182929"
 ---
 # MBAM 2.5 がサポートされる構成
 
 
 Microsoft BitLocker 管理と監視 (MBAM) 2.5 は、スタンドアロントポロジで、または MBAM を System Center Configuration Manager に統合した構成マネージャーの統合トポロジで実行できます。 運用環境でいずれかのトポロジに推奨される構成を使用している場合、MBAM は最大 50万 MBAM クライアントをサポートします。 各トポロジの各サーバー上で構成される推奨アーキテクチャと機能については、「 [MBAM 2.5 向けの高レベルアーキテクチャ](high-level-architecture-for-mbam-25.md)」を参照してください。
 
-構成マネージャーの統合トポロジに固有のその他の構成については、「MBAM でサポートされて[いる Configuration manager のバージョン](#bkmk-cm-ramreqs)」を参照してください。
+構成マネージャーの統合トポロジに固有のその他の構成については、「MBAM でサポートされて [いる Configuration manager のバージョン](#bkmk-cm-ramreqs)」を参照してください。
 
-**注**  
-Microsoft は、現在のサービスパックと、場合によっては、直前のサービスパックのサポートを提供します。 お使いの製品のサポートタイムラインについては、[ライフサイクルでサポートさ](https://go.microsoft.com/fwlink/p/?LinkId=31975)れているサービスパックをご覧ください。 Microsoft サポートライフサイクルポリシーの詳細については、 [Microsoft サポートライフサイクルのサポートポリシー](https://go.microsoft.com/fwlink/p/?LinkId=31976)に関する FAQ を参照してください。
+**備考**  
+Microsoft は、現在のサービスパックと、場合によっては、直前のサービスパックのサポートを提供します。 お使いの製品のサポートタイムラインについては、 [ライフサイクルでサポートさ](https://go.microsoft.com/fwlink/p/?LinkId=31975)れているサービスパックをご覧ください。 Microsoft サポートライフサイクルポリシーの詳細については、 [Microsoft サポートライフサイクルのサポートポリシー](https://go.microsoft.com/fwlink/p/?LinkId=31976)に関する FAQ を参照してください。
 
 
 
 ## MBAM でサポートされる言語
 
 
-次の表は、mbam クライアント (セルフサービスポータルを含む) と mbam 2.5 と mbam 2.5 SP1 でサポートされている言語を示しています。
+次の表は、mbam クライアント (Self-Service ポータルを含む) と mbam 2.5 および mbam 2.5 SP1 でサポートされている言語を示しています。
 
 **MBAM 2.5 SP1 でサポートされる言語:**
 
@@ -165,6 +165,12 @@ Microsoft は、現在のサービスパックと、場合によっては、直�
 </tr>
 </thead>
 <tbody>
+<tr class="odd">
+<td align="left"><p>Windows Server 2019</p></td>
+<td align="left"><p>標準またはデータセンター</p></td>
+<td align="left"></td>
+<td align="left"><p>64 ビット</p></td>
+</tr>
 <tr class="odd">
 <td align="left"><p>Windows Server 2016</p></td>
 <td align="left"><p>標準またはデータセンター</p></td>
@@ -330,7 +336,7 @@ Configuration Manager サーバーでサポートされている構成の一覧�
 
 次の表には、回復データベース、コンプライアンスおよび監査データベース、レポート機能など、MBAM Server 機能でサポートされている Microsoft SQL Server バージョンの一覧を示します。 必須バージョンは、スタンドアロンまたは Configuration Manager の統合トポロジに適用されます。
 
-Sql Server は、 **sql \ _Latin1 \ _General \ _CP1 \ _CI \ _AS**にインストールする必要があります。
+Sql Server は、 **sql \ _Latin1 \ _General \ _CP1 \ _CI \ _AS** にインストールする必要があります。
 
 <table>
 <colgroup>
@@ -349,6 +355,10 @@ Sql Server は、 **sql \ _Latin1 \ _General \ _CP1 \ _CI \ _AS**にインスト
 </thead>
 <tbody>
 <tr class="odd">
+<td align="left"><p>Microsoft SQL Server 2019</p></td>
+<td align="left"><p>標準、エンタープライズ、またはデータセンター</p></td>
+<td align="left"><p></p></td>
+<td align="left"><p>64 ビット</p></td><br/><tr class="even">
 <td align="left"><p>Microsoft SQL Server 2017</p></td>
 <td align="left"><p>標準、エンタープライズ、またはデータセンター</p></td>
 <td align="left"><p></p></td>
@@ -376,8 +386,10 @@ Sql Server は、 **sql \ _Latin1 \ _General \ _CP1 \ _CI \ _AS**にインスト
 </tbody>
 </table>
 
-**注**  
-SQL 2016 をサポートするには、MDOP の2017年3月のサービスリリースをインストールする必要があり https://www.microsoft.com/download/details.aspx?id=54967 ます。また、sql 2017 をサポートするには、mdop 用の7月の2018サービスリリースをインストールする必要があり https://www.microsoft.com/download/details.aspx?id=57157 ます。 一般的に、最新のサービス更新プログラムには、すべてのバグ修正と新機能が含まれているため、常に最新の状態を維持できます。
+**備考**  
+MBAM には、サポートされている最大の互換性レベルとして140があります。 SQL Server 2019 で作成された新規データベースの既定の互換性レベルは150で、データベースの作成後に ALTER DATABASE コマンドを使用して、140以下に変更する必要があります。 SQL server 2017 以降から移行された既存のデータベースは、以前の互換性レベルのままであり、変更する必要はありません。
+
+SQL 2016 をサポートするには、MDOP の2017年3月のサービスリリースをインストールする必要があり https://www.microsoft.com/download/details.aspx?id=54967  ます。また、sql 2017 をサポートするには、mdop 用の7月の2018サービスリリースをインストールする必要があり https://www.microsoft.com/download/details.aspx?id=57157 ます。 一般的に、最新のサービス更新プログラムには、すべてのバグ修正と新機能が含まれているため、常に最新の状態を維持できます。
 
 
 ### <a href="" id="bkmk-sql-stand-alone-ramreqs"></a>SQL Server プロセッサ、RAM、ディスク容量の要件–スタンドアロントポロジ
@@ -587,7 +599,7 @@ MBAM クライアントのインストールに固有の RAM 要件はありま�
 
 ## Azure IaaS の MBAM
 
-MBAM サーバーは、上記のサポート対象のすべての OS バージョンでサービス (IaaS) として展開することができます。また、オンプレミスでホストされている Active Directory または Azure IaaS にホストされている active directory に接続することもできます。  Azure IaaS で Active Directory をセットアップして構成する方法については、[こちらをご覧](https://msdn.microsoft.com/library/azure/jj156090.aspx)ください。
+MBAM サーバーは、上記のサポート対象のすべての OS バージョンでサービス (IaaS) として展開することができます。また、オンプレミスでホストされている Active Directory または Azure IaaS にホストされている active directory に接続することもできます。  Azure IaaS で Active Directory をセットアップして構成する方法については、 [こちらをご覧](https://msdn.microsoft.com/library/azure/jj156090.aspx)ください。
 
 MBAM クライアントは仮想マシンではサポートされておらず、Azure IaaS でもサポートされていません。
 

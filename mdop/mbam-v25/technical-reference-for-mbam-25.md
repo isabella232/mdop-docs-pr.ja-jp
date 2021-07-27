@@ -11,30 +11,34 @@ ms.mktglfcycl: manage
 ms.sitesec: library
 ms.prod: w10
 ms.date: 06/16/2016
-ms.openlocfilehash: 5660757c5fe58b52f9805add781529b47a5c0bd5
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: 0cd77c05a10d6d3b43b1592fd261ccfa3f64376f
+ms.sourcegitcommit: 64dedf394f98c06588a8e5f6d56c34af5431d984
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10812811"
+ms.lasthandoff: 07/23/2021
+ms.locfileid: "11675793"
 ---
-# MBAM 2.5 テクニカル リファレンス
+# <a name="technical-reference-for-mbam-25"></a>MBAM 2.5 テクニカル リファレンス
 
 
-このセクションには、Microsoft BitLocker の管理と監視 (MBAM) 2.5 の機能に関する技術情報が記載されています。
+このセクションには、Microsoft BitLocker Administration and Monitoring (MBAM) 2.5 の機能に関する技術情報が含まれています。
 
-## テクニカルリファレンス情報
+## <a name="technical-reference-information"></a>技術情報
 
 
 -   [クライアントのイベント ログ](client-event-logs.md)
 
-    このトピックでは、MBAM のクライアントイベントの一覧を示します。
+    このトピックでは、MBAM のクライアント イベントの一覧を示します。
 
 -   [サーバーのイベント ログ](server-event-logs.md)
 
-    このトピックでは、MBAM のサーバーイベントの一覧を示します。
+    このトピックでは、MBAM のサーバー イベントの一覧を示します。
 
-## MBAM 操作に関するその他のリソース
+- [BitLocker 展開の比較](/windows/security/information-protection/bitlocker/bitlocker-deployment-comparison)
+
+    このトピックでは、BitLocker 展開比較グラフに関する情報を提供します。
+
+## <a name="other-resources-for-mbam-operations"></a>MBAM 操作のその他のリソース
 
 
 [Microsoft BitLocker Administration and Monitoring 2.5](index.md)
@@ -49,14 +53,13 @@ ms.locfileid: "10812811"
 
 [MBAM 2.5 のトラブルシューティング](troubleshooting-mbam-25.md)
 
-## MBAM の提案をお寄せください。
-- [ここで](http://mbam.uservoice.com/forums/268571-microsoft-bitlocker-administration-and-monitoring)候補を追加または投票してください。 
-- MBAM の問題については、 [Mbam TechNet フォーラムをご覧](https://social.technet.microsoft.com/Forums/home?forum=mdopmbam)ください。
+## <a name="got-a-suggestion-for-mbam"></a>MBAM の提案を受け取った場合
+- ここで提案を追加または投票 [します](http://mbam.uservoice.com/forums/268571-microsoft-bitlocker-administration-and-monitoring)。 
+- MBAM の問題については [、MBAM TechNet フォーラムを使用します](https://social.technet.microsoft.com/Forums/home?forum=mdopmbam)。
 
- 
+ 
 
- 
-
+ 
 
 
 

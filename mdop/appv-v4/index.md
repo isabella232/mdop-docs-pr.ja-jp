@@ -10,7 +10,7 @@ ms.prod: w10
 ms.date: 06/16/2016
 ms.openlocfilehash: c62847515216cf0a02bbc81f02bc179be36161ae
 ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
-ms.translationtype: MT
+ms.translationtype: HT
 ms.contentlocale: ja-JP
 ms.lasthandoff: 06/26/2020
 ms.locfileid: "10795640"
@@ -18,14 +18,14 @@ ms.locfileid: "10795640"
 # Application Virtualization 4
 
 
-Microsoft Application は、アプリケーションをコンピューターに直接インストールしなくても、エンドユーザーのコンピューターがアプリケーションを利用できるようにするための管理機能を Virtualizationprovides します。
+Microsoft Application Virtualization は、エンド ユーザーのコンピューターにアプリケーションを直接インストールすることなく、それらのコンピューターでアプリケーションを利用できるようにする管理機能を提供します。
 
 ## 技術文書
 
 
-TechNet ライブラリの Application Virtualizationin の技術文書には、次のセクションが含まれています。
+TechNet ライブラリの Application Virtualization の技術文書には、次のセクションが含まれます。
 
--   [Microsoft Application Virtualization の概要ガイド](microsoft-application-virtualization-getting-started-guide.md)
+-   [Microsoft Application Virtualization ファースト ステップ ガイド](microsoft-application-virtualization-getting-started-guide.md)
 
 -   [Application Virtualization システムの計画と展開ガイド](planning-and-deployment-guide-for-the-application-virtualization-system.md)
 

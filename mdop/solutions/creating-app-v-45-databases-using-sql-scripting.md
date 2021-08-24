@@ -11,224 +11,224 @@ ms.mktglfcycl: deploy
 ms.sitesec: library
 ms.prod: w10
 ms.date: 06/16/2016
-ms.openlocfilehash: d9ab2c102a43701bfdeaac49359b4ca3c4a063fa
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: c119f1d43a70cce04dd6151697318f7cf6a8d1f2
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10825977"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910592"
 ---
-# SQL スクリプトを使用した APP-V 4.5 データベースの作成
+# <a name="creating-app-v-45-databases-using-sql-scripting"></a>SQL スクリプトを使用した APP-V 4.5 データベースの作成
 
 
-**このソリューションの目的** Application Virtualization (App-v) 4.5 データベースを管理する it 技術者。
+**Whoソリューションの目的は何ですか?** アプリケーション仮想化 (App-V) 4.5 データベースを管理する情報技術の専門家。
 
-**このガイドはどのように役立つのでしょうか。** この解決策では、管理者のインストールで SQL Server に "sysadmin" 権限が付与されていない場合に、Microsoft Application Virtualization Server をインストールする手順について説明します。
+**このガイドは、どのように役立ちますか?** このソリューションは、インストールする管理者が SQL Server に対する "sysadmin" 権限を持っていない場合に Microsoft Application Virtualization Server をインストールする手順について説明し、文書化しています。
 
-## 概要
+## <a name="overview"></a>概要
 
 
-Microsoft Application Virtualization 4.5 (App-v) をインストールする際の問題の1つとして、インストールプログラムでは、サーバー機能をインストールするユーザーはローカルコンピューターの管理者であると同時に、データストアをホストする SQL server の SQL 管理者権限を持つ必要があると見なされます。 この要件は、データベースがインストールの一部として作成されたものであり、適切な役割とアクセス許可が作成されていることに基づいています。 ただし、ほとんどの企業では、SQL server は、App-v をインストールするインフラストラクチャチームとは別に管理されます。 これらのセキュリティ要件により、SQL 管理者は、App-v の適切な権限をインストールすることが困難になります。同様に、SQL 管理者には、インフラストラクチャチームの製品をインストールするために必要な権限がありません。
+Microsoft Application Virtualization 4.5 (App-V) をインストールする場合の課題の 1 つは、インストール プログラムが、サーバー機能をインストールするユーザーがローカル コンピューター管理者であるだけでなく、データ ストアをホストする SQL サーバーに対する SQL 管理者特権を持つものと見なしている点です。 この要件は、データベースと適切な役割とアクセス許可がインストールの一部として作成されるという事実に基づいて行います。 ただし、ほとんどの企業では、SQLサーバーは、App-V をインストールするインフラストラクチャ チームとは別に管理されます。 これらのセキュリティ要件を満たすと、インフラストラクチャ管理者SQL App-V をインストールする適切な権限を与えるのが困難になります。同様に、SQL管理者は、インフラストラクチャ チームに製品をインストールするために必要な特権を持つ必要はありません。
 
-現時点では、App-v をインストールしようとしている管理者は、SQL "sysadmin" 権限を持っている必要があります。 以前のバージョンの製品では、SQL 管理者は、一時的な "sysadmin" アカウントを作成するか、インストール中に "sysadmin" 権限を持つ資格情報を提供するように設定することができます。 このリリースでは、すべての管理者がインフラストラクチャを実装するときに使用するために、リリースされた製品でスクリプトを提供しています。
+現時点では、App-V のインストールを試みる管理者には、"sysadmin" SQL必要があります。 以前のバージョンの製品では、SQL 管理者が一時的な "sysadmin" アカウントを作成するか、インストール中に存在して資格情報に "sysadmin" 権限を与えるセットアップが許可されています。 このリリースでは、すべての管理者がインフラストラクチャの実装時に使用するためのスクリプトがリリースされた製品に用意されています。
 
-このホワイトペーパーでは、インストールを2つの別々のタスク (SQL データベースの作成、アプリ-V server 機能のインストール) に分ける必要があるシナリオについて説明します。 SQL 管理者は、SQL スクリプトを確認し、他のデータベースとの競合を解決したり、他のツールとの統合をサポートしたりするように変更を加えることができます。 スクリプトの結果として、sql 管理者は、sql server の高度な権限を付与する必要がないように、データベースの準備を行うことができます。 これは、セキュリティポリシーによって禁止されている環境で重要です。
+このホワイトペーパーでは、インストールを SQL データベースの作成と App-V サーバー機能のインストールという 2 つのタスクに分けてインストールする必要があるシナリオについて説明します。 管理者SQLは、SQL スクリプトを確認し、他のデータベースとの競合を解決したり、他のツールとの統合をサポートしたりするために変更を加える可能性があります。 スクリプトの結果、SQL 管理者がデータベースを準備して、インフラストラクチャ管理者に SQL サーバーに対する高度な権限を付与する必要がなSQLです。 これは、セキュリティ ポリシーで禁止される環境で重要です。
 
-### SQL データベースの作成プロセス
+### <a name="sql-database-creation-process"></a>SQL Database作成プロセス
 
-SQL スクリプトを使用すると、SQL 管理者が必要なデータベースを作成できるようにしたり、アプリの管理者が環境を正常にインストールして管理するための権限を設定したりすることができます。 これらのタスクを完了する手順は、このドキュメントの後半に記載されています。
+SQLスクリプトを使用すると、SQL 管理者は必要なデータベースを作成し、App-V 管理者が環境を正常にインストールおよび管理するための特権を設定できます。 これらのタスクを完了するための手順については、このドキュメントの後半で説明します。
 
-このプロセスでは、データベースの作成と構成のアクションが、実際の App-v インストールから分離されます。
+このプロセスでは、データベースの作成および構成アクションと実際の App-V インストールが分離されます。
 
-**SQL 管理者に提供される情報**
+**管理者に提供SQL情報**
 
--   App-v 管理者の権限を持つ広告グループの名前
+-   App-V ADになるグループの名前
 
--   App-v Management Server をインストールするサーバーの名前
+-   App-V 管理サーバーがインストールされるサーバーの名前
 
-**インフラストラクチャ管理者に返す情報**
+**インフラストラクチャ管理者に返される情報**
 
--   データベースサーバーまたはインスタンスの名前と、App-v データベースの名前
+-   データベース サーバーまたはインスタンスの名前と App-V データベースの名前
 
-データベースの準備が完了したら、App-v 管理者は、SQL 管理者権限を持たずに app-v のインストールを実行できます。
+データベースの準備が完了すると、App-V 管理者は、管理者特権を使用せずに App-V SQL実行できます。
 
-### SQL セットアップスクリプトを使用する
+### <a name="using-the-sql-setup-scripts"></a>セットアップ スクリプトSQL使用する
 
 **要件**
 
-選択した抽出位置のルートの support\\createdb フォルダーにあるスクリプトを使用するための要件の一覧を次に示します。
+選択した抽出場所のルートにある support\\createdb フォルダーにあるスクリプトを使用するための要件の一覧を次に示します。
 
--   スクリプトは、実行先のコンピューター上の書き込み可能な場所にコピーする必要があります (コピーされた後にこれらのスクリプトから読み取り専用属性を削除してください)。 SQL クライアントツールは、そのコンピューターに読み込む必要があります (osql は、ローカルコンピューターでサンプルのバッチファイルを実行する場合のみ必要です)。
+-   スクリプトは、実行するコンピューター上の書き込み可能な場所にコピーする必要があります (コピー後に、必ずこれらのスクリプトから読み取り専用属性を削除してください)、SQL クライアント ツールをそのコンピューターに読み込む必要があります (osql は、ローカル コンピューターでサンプル バッチ ファイルを実行する場合にのみ必要です)。
 
--   SQL Server は Windows 認証をサポートしている必要があります。
+-   このSQL Server認証をサポートWindows必要があります。
 
--   SQL Server インスタンスと SQL エージェントサービスが実行されていることを確認します。
+-   エージェント サービスがSQL ServerインスタンスSQL確認します。
 
--   スクリプトが実行されるコンピューターの SQL 管理者 (sysadmin) であるドメインアカウントでログオンします。
+-   スクリプトが実行されるコンピューター上SQL管理者 (sysadmin) であるドメイン アカウントでログオンします。
 
-スクリプトは、ログオンしているユーザーのドメイン資格情報で実行されます。
+スクリプトは、ログオンしているユーザーのドメイン資格情報の下で実行されます。
 
-**SQL スクリプトを使用したデータベースの作成**
+**スクリプトを使用したデータベースSQL作成**
 
-**SQL 管理者が実行するタスク:**
+**管理者が実行するSQL:**
 
-1.  選択した抽出場所のルートから、スクリプトが実行されるコンピューターに、support\\createdb フォルダーに含まれているスクリプトをコピーします。 スクリプトを正しく実行するためには次のファイルが必要であり、次の順序で呼び出す必要があります。
+1.  support\\createdb フォルダーに含まれるスクリプトを、選択した抽出場所のルートから、スクリプトが実行されるコンピューターにコピーします。 スクリプトを適切に実行するには、次のファイルが必要であり、以下に示す順序で呼び出す必要があります。
 
-    -   データベース。 sql
+    -   database.sql
 
-    -   ロール. sql
+    -   roles.sql
 
-    -   表 \ _CODES
+    -   table\_CODES.sql
 
-    -   関数 \ _before \ _tables
+    -   functions\_before\_tables.sql
 
-    -   表 .sql
+    -   tables.sql
 
-    -   関数 .sql
+    -   functions.sql
 
-    -   views
+    -   views.sql
 
-    -   手順 .sql
+    -   procedures.sql
 
-    -   triggers
+    -   triggers.sql
 
-    -   データ \ _codes .sql
+    -   data\_codes.sql
 
-    -   データ \ _messages .sql
+    -   data\_messages.sql
 
-    -   データ \ _defaults .sql
+    -   data\_defaults.sql
 
-    -   通知 \ _jobs
+    -   alerts\_jobs.sql
 
-    -   dbversion .sql
+    -   dbversion.sql
 
-2.  ファイルを確認し、必要に応じて変更し `database.sql` ます。 既定の設定では、データベースに "APPVIRTDB" という名前が付いています。
+2.  必要に応じて、ファイルを確認して変更 `database.sql` します。 既定の設定では、データベースに "APPVIRTDB" という名前が付きます。
 
-    -   必要に応じて、が使用されるのインスタンスをに置き換え `APPVIRTDB` `database name` ます。
+    -   必要に応じて、インスタンスを `APPVIRTDB` 使用 `database name` するインスタンスに置き換える必要があります。
 
-    -   `FILENAME`スクリプト内のプロパティを、データベースを作成する SQL Server の適切なパスに変更します。
+    -   スクリプト内 `FILENAME` のプロパティを、データベースが作成されるSQL Serverパスを使用して変更します。
 
-3.  必要に応じて、 `database name [APPVIRTDB]` データベースの .sql ファイルで `roles.sql` 使用されていたファイルの内容を確認して変更します。
+3.  必要に応じて、database.sql ファイルで使用されたファイル `database name [APPVIRTDB]` `roles.sql` 内を確認して変更します。
 
 ****
 
-### バッチファイルを使用してプロセスを自動化する方法の例
+### <a name="example-of-how-to-automate-the-process-using-batch-files"></a>バッチ ファイルを使用してプロセスを自動化する方法の例
 
-この2つのサンプルバッチファイルを使用すると、次のような方法で SQL スクリプトが実行されます。
+使用する場合、提供されている 2 つのサンプル バッチ ファイルは、SQLスクリプトを実行します。
 
 1.  **Create\_schema.bat (1)**
 
-    -   データベース。 sql
+    -   database.sql
 
-    -   ロール. sql
+    -   roles.sql
 
 2.  **Create\_tables.bat (2)**
 
-    -   表 \ _CODES
+    -   table\_CODES.sql
 
-    -   関数 \ _before \ _tables
+    -   functions\_before\_tables.sql
 
-    -   表 .sql
+    -   tables.sql
 
-    -   関数 .sql
+    -   functions.sql
 
-    -   views
+    -   views.sql
 
-    -   手順 .sql
+    -   procedures.sql
 
-    -   triggers
+    -   triggers.sql
 
-    -   データ \ _codes .sql
+    -   data\_codes.sql
 
-    -   データ \ _messages .sql
+    -   data\_messages.sql
 
-    -   データ \ _defaults .sql
+    -   data\_defaults.sql
 
-    -   通知 \ _jobs
+    -   alerts\_jobs.sql
 
-    -   dbversion .sql
+    -   dbversion.sql
 
-**注**  
-スクリプトを変更するときは慎重に考慮する必要があります。また、適切な知識を持っているユーザーだけが実行する必要があります。 また、表示されるサンプルファイルは、次のように変更する必要があります。 **create\_schema.bat**、 **create\_tables.bat**、 **.sql**、および**roles**。 その他のすべてのファイルを変更しないようにする必要があります。これにより、データベースが正しく作成されないことがあります。これにより、App-v サービスのインストールに失敗する可能性があります。
+**備考**  
+スクリプトを変更する場合は慎重に検討する必要があります。適切な知識を持つユーザーだけが行う必要があります。 また、次のサンプル ファイルのみを変更する必要**があります**。create\_schema.bat、create\_tables.bat、database.sql、および**roles.sql**です。 ** ** **** データベースが誤って作成され、App-V サービスのインストールが失敗する可能性があります。他のすべてのファイルを変更する必要があります。
 
 
 
-この2つのサンプルバッチファイルは、コンピューター上の他の SQL スクリプトのコピー先と同じディレクトリに配置する必要があります。
+2 つのサンプル バッチ ファイルは、残りのスクリプトがコンピューターにコピーされた同SQLディレクトリに配置する必要があります。
 
-1.  サンプルの**create\_schema.bat**ファイルを実行してデータベースを作成します。 このスクリプトは、完了までに数秒かかりますので、中断する必要はありません。
+1.  サンプル ファイルを実行 **create\_schema.bat** データベースを作成します。 このスクリプトの完了には数秒かかるので、中断する必要があります。
 
-    -   コピー先のディレクトリから [create schema.bat ファイルを実行します。 書式: "Create\_schema.bat `SQLSERVERNAME` "
+    -   コピー先のディレクトリschema.batファイルの作成を実行します。 構文は次のとおりです `SQLSERVERNAME` 。"Create\_schema.bat"
 
-        ![AppV46SQLcreatebat](images/appv46sqlcreatebat.bmp)
+        ![AppV46SQLcreatebat。](images/appv46sqlcreatebat.bmp)
 
-    -   このスクリプトが新しい "APPVIRTDB" データベースの作成中に失敗した場合は、上記のようにログを確認して問題を修正します。 以降の試行が適切に動作するようにするために、スクリプトの一部を実行して作成されたデータベースを削除する必要があります。
+    -   新しい "APPVIRTDB" データベースの作成中にこのスクリプトが失敗した場合は、示されているログを確認して問題を修正します。 後続の試行が正常に動作するには、スクリプトの部分的な実行で作成されたデータベースを削除する必要があります。
 
-2.  ファイルを実行して `create_tables.bat` データベース内のテーブルを作成します。 このスクリプトは、完了までに数秒かかりますので、中断する必要はありません。
+2.  ファイルを `create_tables.bat` 実行して、データベースにテーブルを作成します。 このスクリプトの完了には数秒かかるので、中断する必要があります。
 
-    -   コピーされたディレクトリから create\_tables.bat ファイルを実行します。 書式: "create\_tables.bat `SQLSERVERNAME DBNAME` "
+    -   コピーされたcreate\_tables.batファイルを実行します。 構文は次のとおりです `SQLSERVERNAME DBNAME` 。"create\_tables.bat"
 
-        ![app-v 4.6 sql create\-table.bat](images/appv46sqlcreate-tablebat.gif)
+        ![app-v 4.6 sql create\-table.bat。](images/appv46sqlcreate-tablebat.gif)
 
-        テーブルの作成時にスクリプトが失敗した場合は、上記のようにログを確認して問題を修正します。 データベースを削除して create\_schema.bat 実行してから、create\_tables.bat ファイルを実行しようとするたびに実行する必要があります。
+        テーブルの作成中にスクリプトが失敗した場合は、示されているログを確認して問題を修正します。 以降のすべての試行でデータベース を削除し、create\_schema.batファイルを実行する前に、create\_tables.bat実行する必要があります。
 
-### App-v データベースのアクセス許可を設定する
+### <a name="setting-permissions-on-the-app-v-database"></a>App-V データベースに対するアクセス許可の設定
 
-アプリのインストール、展開、継続的な管理のために、新しいデータベースに対する特定の権限と役割を持つ SQL server 上で、次のアカウントを作成する必要があります。
+次のアカウントは、app-V 環境のインストール、展開、および継続的な管理のために、新しいデータベースに対する特定のアクセス許可と役割を持つ SQL サーバー上に作成する必要があります。
 
--   SQL Server 上の App-v 管理グループのログインを作成し、"domain\\App-V Admins" ("domain" と "App-v Admins" は、自分の環境を反映するために変更されます) APPVIRTDB データベースを作成し、それを SFTAdmin と SFTEveryone database role に追加します。
+-   SQL Server の App-V 管理者グループと、"domain\\App-V Admins" ("domain" と "App-V Admins" が独自の環境を反映するように変更される) の APP-V 管理者グループのログインを作成し、SFTAdmin および SFTEveryone データベースの役割に追加します。
 
-    ![app-v 4.6 sql スクリプト: 権限とロールを設定する](images/appv46sqlscriptsetpermsroles.gif)
+    ![app-v 4.6 sql スクリプト セットのアクセス許可と役割。](images/appv46sqlscriptsetpermsroles.gif)
 
--   グローバルレベルで "VIEW ANY DEFINITION" アクセス許可を与える (Microsoft Application Virtualization Management Server のセットアッププロセスでは、管理サーバーのログインが既に存在することを確認できます)。 [MS SQL 2005] の下で、.master に含まれるメタデータに対するアクセス制限が追加されました。 前の手順で作成したユーザーには、サーバーのインストールに必要な権限が既定で付与されることはありません。 以前に作成したログインプロパティ-Securables のプロパティを開き &gt; ます。 次のスクリーンショットのように、データベースインスタンスを追加して、"すべての定義を表示" に "GRANT" を有効にします。
+-   このグループに"VIEW ANY DEFINITION" アクセス許可をグローバル レベルで付与します (これにより、Microsoft Application Virtualization Management Server セットアップ プロセスで、管理サーバーログインが既に存在することを確認できます)。 MS-SQL 2005 および master.db に含まれるメタデータに対する上記のアクセス制限が追加されました。 前の手順で作成したユーザーは、既定では、サーバーインストールに必要な権限を持たしません。 以前に作成したログインのプロパティである Login Properties- &gt; Securables を開きます。 次のスクリーンショットに示すように、データベース インスタンスを追加し、"定義を表示する" の "GRANT" を有効にしてください。
 
-    ![app-v 4.6 sql スクリプト表示の権限を付与する](images/appv46sqlscriptviewanydef.gif)
+    ![app-v 4.6 sql script grant perm for view any def.](images/appv46sqlscriptviewanydef.gif)
 
--   前の手順で作成したログインの役割 \ _ASSIGNMENTS テーブルに役割を追加して、Application Virtualization 管理コンソールへのアクセスを許可します。役割 = "ADMIN" とグループ \ _ref = "domain\\App-V administrator" ("domain" と "App-info Admins") は、自分の環境を反映するように変更されます)。
+-   前の手順で作成したログインの ROLE\_ASSIGNMENTS テーブルに役割を追加し、App-V 管理者がアプリケーション仮想化管理コンソールにアクセスし、role = "ADMIN" と group\_ref = "domain\\App-V Admins" ("domain" と "App-V Admins" が自分の環境を反映するように変更されます)。
 
-    ![app-v 4.6 sql スクリプトの役割の割り当て](images/appv46sqlscriptroleassign.gif)
+    ![app-v 4.6 sql スクリプトの役割の割り当て。](images/appv46sqlscriptroleassign.gif)
 
--   管理サーバーの SQL Server と App-v データベースのログインを作成します。 このアカウントは、Microsoft Application Virtualization Management Server がデータストアに接続するために使用され、ストリーミングされたアプリケーションに対するクライアント要求の処理を担当します。 SQL Server と管理サーバーをインストールする場所に応じて、次の2つのオプションがあります。
+-   管理サーバーのSQL Server App-V データベースのログインを作成します。 このアカウントは、データ ストアに接続するために Microsoft Application Virtualization Management Server によって使用され、ストリーミングされたアプリケーションのクライアント要求にサービスを提供する責任があります。 サーバーと管理サーバーのインストール先に応SQL Server 2 つのオプションがあります。
 
-    1.  管理サーバーと SQL Server が同じコンピューターにインストールされる場合は、NT AUTHORITY\\NETWORK SERVICE のログインを追加して、SFTUser と SFTEveryone database ロールに追加します。
+    1.  管理サーバーと SQL Server が同じコンピューターにインストールされる場合は、NT AUTHORITY\\NETWORK SERVICE のログインを追加し、SFTUser および SFTEveryone データベースの役割に追加します。
 
-    2.  管理サーバーと SQL Server を異なるコンピューターにインストールする場合は、"domain\\App-V Server Name $" ("App-V Server Name $") のログインを追加して、SFTUser ロールと SFTEveryone database ロールにそのサーバーの名前が追加されるようにします。
+    2.  管理サーバーと SQL Server を別のコンピューターにインストールする場合は、"domain\\App-V Server Name$" ("App-V Server 名" は App-V 管理サーバーがインストールされるサーバーの名前) のログインを追加し、SFTUser および SFTEveryone データベースの役割に追加します。
 
--   SQL ウィンドウで [クエリ] ウィンドウを開いて、次の SQL を実行します。
+-   [クエリ ウィンドウ] ウィンドウを開SQL、次のコマンドを実行SQL。
 
     ``` syntax
     USE APPVIRTDB
     GRANT ALTER ON ROLE::SFTuser TO “domain\App-V Admins”
     ```
 
-    ここで、APPVIRTDB は、前の手順で SQL Server で作成された App-v データベースの名前であり、アプリをインストールするユーザーは "domain\\App-V Admins" のメンバーである必要があります ("domain" と "App V Admins" は、自分の環境を反映するように変更されます)。
+    APPVIRTDB は、前の手順で SQL Server で作成された App-V データベースの名前であり、App-v サーバーのインストールを行うユーザーは "domain\\App-V Admins" のメンバーである必要があります ("domain" と "App-V Admins" は、独自の環境を反映するように変更されます)。
 
-### インフラストラクチャ管理者によって実行されるタスク
+### <a name="tasks-to-be-performed-by-the-infrastructure-administrators"></a>インフラストラクチャ管理者が実行するタスク
 
-1.  "App-v Admins" グループの管理者は、App-v をインストールする必要があります。
+1.  "App-V Admins" グループの管理者は、App-V をインストールする必要があります。
 
-    SQL 管理者からの情報を使用して、前の手順で作成した SQL Server とデータベースを選択します。
+    前の手順で作成SQLデータベースを選択するには、SQL Server管理者からの情報を使用します。
 
-2.  "App-v Admins" グループの管理者は、Application Virtualization 管理コンソールにログインし、管理コンソールから次のオブジェクトを削除します。
+2.  "App-V Admins" グループの管理者は、Application Virtualization Management Console にログインし、管理コンソールから次のオブジェクトを削除します。
 
     **Warning**  
-    これは、既存のデータベースに対してインストールを実行する場合、従来のセットアップによってデータベース内の特定のレコードに入力される必要があるためです。 次のオブジェクトを削除します。
+    従来のセットアップでは、既存のデータベースに対してインストールを実行した場合に、データベースに設定されていない特定のレコードが設定されます。 次のオブジェクトを削除します。
 
-    -   [サーバーグループ] の下で、"既定のサーバーグループ" というアプリケーション仮想化管理サーバーを削除します。
+    -   [サーバー グループ] の [既定のサーバー グループ] で、[アプリケーション仮想化管理サーバー] を削除します。
 
-    -   [サーバーグループ] の [既定のサーバーグループの削除]
+    -   [サーバー グループ] で、[既定のサーバー グループ] を削除します。
 
-    -   "プロバイダーポリシー" で、"既定のプロバイダー" を削除します。
+    -   [プロバイダー ポリシー] で、[既定のプロバイダー] を削除します。
 
 
 
-3.  App-v admins グループの管理者は次のものを作成する必要があります。
+3.  App-V admins グループの管理者は、次の情報を作成する必要があります。
 
-    -   [プロバイダーポリシー] の下で、新しいプロバイダーポリシーを作成する
+    -   [プロバイダー ポリシー] で、新しいプロバイダー ポリシーを作成します。
 
-    -   "既定のサーバーグループ" を作成する
+    -   "既定のサーバー グループ" を作成する
 
-        **注**  
-        使用しない場合でも、"既定のサーバー" グループを作成する必要があります。 サーバーのインストーラーでは、サーバーを追加しようとしたときに、"既定のサーバーグループ" のみが検索されます。  "既定のサーバーグループ" が存在しない場合、インストールは失敗します。 既定以外のサーバーグループを使用することを計画している場合は、その後の App-v 管理サーバーをインフラストラクチャに追加する予定がある場合は、"既定のサーバーグループ" を保持する必要があるだけです。
+        **備考**  
+        使用しない場合でも、"Default Server" グループを作成する必要があります。 サーバー インストーラーは、サーバーを追加しようとするときにのみ"既定のサーバー グループ" を参照します。  "既定のサーバー グループ" がない場合、インストールは失敗します。 既定以外のサーバー グループを使用する場合は、それ以降の App-V 管理サーバーをインフラストラクチャに追加する場合は、「既定のサーバー グループ」を保持する必要があります。
 
 
 
@@ -247,10 +247,10 @@ SQL スクリプトを使用すると、SQL 管理者が必要なデータベー
 -   Administrator restarts the Application Virtualization Management Server service.
 ~~~
 
-## まとめ
+## <a name="conclusion"></a>まとめ
 
 
-このドキュメントに記載されている情報により、管理者は、組織内のセキュリティと管理部門に対応する展開パスを開発するために、SQL 管理者と作業を行うことができます。 このドキュメントを読み、文書化されたタスクをテストした後、管理者はこの種類の環境にアプリの app-v インフラストラクチャを実装する準備ができている必要があります。
+結論として、このドキュメントの情報を使用すると、管理者は SQL 管理者と一緒に、組織内のセキュリティ部門と管理部門に対して機能する展開パスを開発できます。 このドキュメントを読み、文書化されたタスクをテストした後、管理者は、この種類の環境で App-V インフラストラクチャを実装する準備ができている必要があります。
 
 
 

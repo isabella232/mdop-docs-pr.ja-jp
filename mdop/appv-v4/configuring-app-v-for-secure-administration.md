@@ -11,34 +11,34 @@ ms.mktglfcycl: deploy
 ms.sitesec: library
 ms.prod: w10
 ms.date: 06/16/2016
-ms.openlocfilehash: de70c1df734bbf1168fd7dacf9410d3451a8a3c2
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: c95fab4b2b4f402df4ff0f82f2f346c9bd226e00
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10821904"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910482"
 ---
-# セキュリティで保護された管理用の APP-V の構成
+# <a name="configuring-app-v-for-secure-administration"></a>セキュリティで保護された管理用の APP-V の構成
 
 
-管理操作がセキュリティで保護されている環境では、app-v では、app-v Web Management サービスと App-v 管理コンソールの間で安全な通信を行うことができます。 管理サービスは Web ベースのアプリケーションであるため、管理サービスをホストしている Web サーバー上で App-v Management Server アプリケーションをセキュリティで保護する必要があります。 次の図に示すように、このプロセスでは、通信に HTTPS を使用し、Windows 統合認証のみを許可するように IIS サーバーを構成しています。
+管理操作のセキュリティ保護が重要な環境では、App-V を使用すると、App-V Web 管理サービスと App-V 管理コンソール間の安全な通信が可能になります。 管理サービスは Web ベースのアプリケーションなので、管理サービスをホストする Web サーバー上で App-V 管理サーバー アプリケーションをセキュリティ保護する必要があります。 次の図に示すように、このプロセスには、通信に HTTPS を使用し、統合認証のみを許可するように IIS サーバー Windows含まれます。
 
-![app-v web service のネットワーク構成](images/appvmgmtwebservice.gif)
+![app-v Web サービスのネットワーク構成。](images/appvmgmtwebservice.gif)
 
-App-v Web 管理サービスは、IIS 上の Web ベースのアプリケーションとしてインストールされます。 Web 管理サービスで、App-v 管理コンソールと Web 管理サービスの間のセキュリティで保護された (SSL) 接続をサポートするには、Web 管理サービスがインストールされている IIS サーバーを構成し、App-v 管理コンソールを構成する必要があります。
+App-V Web 管理サービスは、IIS に Web ベースのアプリケーションとしてインストールされます。 Web 管理サービスが App-V 管理コンソールと Web 管理サービスの間でセキュリティで保護された (SSL) 接続をサポートするには、Web 管理サービスがインストールされている IIS サーバーを構成し、App-V 管理コンソールを構成する必要があります。
 
-## このセクションの内容
+## <a name="in-this-section"></a>このセクションの内容
 
 
 <a href="" id="configuring-certificates-to-support-the-app-v-web-management-service"></a>[App-V Web Management Service をサポートするための証明書の構成](configuring-certificates-to-support-the-app-v-web-management-service.md)  
-SSL ベースの接続をサポートする証明書を構成する方法について説明します。この情報は、App-v Web Management Service の通信をセキュリティで保護するために役立ちます。
+App-V Web Management Service の通信をセキュリティで保護するために、SSL ベースの接続をサポートするための証明書の構成に関する役立つ情報を提供します。
 
 <a href="" id="how-to-install-and-configure-the-app-v-management-console-for-a-more-secure-environment"></a>[より安全な環境のために APP-V Management Console をインストールして構成する方法](how-to-install-and-configure-the-app-v-management-console-for-a-more-secure-environment.md)  
-セキュリティで保護された接続を使用して、App-v Web 管理サービスに接続するための手順について説明します。
+セキュリティで保護された接続を使用して App-V Web 管理サービスに接続するための手順を詳しい手順で示します。
 
- 
+ 
 
- 
+ 
 
 
 

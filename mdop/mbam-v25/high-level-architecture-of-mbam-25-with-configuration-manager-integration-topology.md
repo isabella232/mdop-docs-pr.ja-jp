@@ -11,27 +11,28 @@ ms.sitesec: library
 ms.prod: w10
 ms.date: 08/23/2018
 ms.author: dansimp
-ms.openlocfilehash: 75af2e22981d76568916c36acadbbb25648b1f1d
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: a0f9349391794100a670e382bb18d0713f4b5b60
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10825764"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910722"
 ---
-# MBAM 2.5 の高レベルアーキテクチャと構成マネージャーの統合トポロジ
+# <a name="high-level-architecture-of-mbam-25-with-configuration-manager-integration-topology"></a>Configuration Manager 統合トポロジを使用した MBAM 2.5 のハイレベル アーキテクチャ
 
-このトピックでは、Configuration Manager 統合トポロジを使用して、Microsoft BitLocker 管理と監視 (MBAM) を展開するための推奨アーキテクチャについて説明します。 このトポロジは、MBAM を System Center Configuration Manager と統合したものです。 スタンドアロントポロジで MBAM を導入する場合は、「 [mbam 2.5 の高レベルアーキテクチャとスタンドアロントポロジ](high-level-architecture-of-mbam-25-with-stand-alone-topology.md)」を参照してください。
+このトピックでは、Configuration Manager 統合トポロジを使用して Microsoft BitLocker Administration and Monitoring (MBAM) を展開する場合の推奨アーキテクチャについて説明します。 このトポロジでは、MBAM とデータベースSystem Center Configuration Manager。 スタンドアロン トポロジを使用して MBAM を展開するには、「スタンドアロン トポロジを使用した [MBAM 2.5 のハイレベル アーキテクチャ」を参照してください](high-level-architecture-of-mbam-25-with-stand-alone-topology.md)。
 
-このトピックで説明しているソフトウェアのサポートされているバージョンの一覧については、「 [Mbam 2.5 でサポートされている構成](mbam-25-supported-configurations.md)」を参照してください。
+このトピックで説明するソフトウェアのサポートされているバージョンの一覧については [、「MBAM 2.5 サポートされる構成」を参照してください](mbam-25-supported-configurations.md)。
 
-**重要** Configuration Manager 2007 を使用している場合、Configuration Manager 統合トポロジのインストールでは、Windows To Go はサポートされません。
+**重要**  
+WindowsConfiguration Manager 2007 を使用している場合、To Go は Configuration Manager 統合トポロジ のインストールではサポートされていません。
 
  
 
-## 推奨されるサーバー数とクライアント数
+## <a name="recommended-number-of-servers-and-supported-number-of-clients"></a>推奨されるサーバー数とサポートされるクライアント数
 
 
-運用環境での推奨されるサーバー数とサポートされているクライアント数は、次のとおりです。
+実稼働環境で推奨されるサーバー数とサポートされるクライアント数は次のとおりです。
 
 <table>
 <colgroup>
@@ -40,135 +41,135 @@ ms.locfileid: "10825764"
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">推奨されるアーキテクチャ</th>
+<th align="left">推奨アーキテクチャ</th>
 <th align="left">詳細</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><p>サーバーとその他のコンピューターの数</p></td>
-<td align="left"><p>3台のサーバー</p>
-<p>1つのワークステーション</p></td>
+<td align="left"><p>サーバーと他のコンピューターの数</p></td>
+<td align="left"><p>3 つのサーバー</p>
+<p>1 つのワークステーション</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>サポートされているクライアントコンピューターの数</p></td>
-<td align="left"><p>50万</p></td>
+<td align="left"><p>サポートされているクライアント コンピューターの数</p></td>
+<td align="left"><p>500,000</p></td>
 </tr>
 </tbody>
 </table>
 
  
 
-## Configuration Manager の統合とスタンドアロントポロジの違い
+## <a name="differences-between-configuration-manager-integration-and-stand-alone-topologies"></a>Configuration Manager 統合とスタンドアロン トポロジの違い
 
 
-トポロジ間の主な違いは次のとおりです。
+トポロジの主な違いは次のとおりです。
 
--   コンプライアンス機能とレポート機能は、MBAM から削除され、構成マネージャーからアクセスされます。
+-   コンプライアンス機能とレポート機能は MBAM から削除され、Configuration Manager からアクセスされます。
 
--   レポートは、Configuration Manager 管理コンソールから表示されます。回復監査レポートは除き、MBAM 管理と監視 Web サイトから引き続き表示できます。
+-   レポートは、MBAM 管理および監視 Web サイトから引き続き表示される回復監査レポートを除き、Configuration Manager 管理コンソールから表示されます。
 
-## Configuration Manager の統合トポロジを使用した、推奨される MBAM 高レベルアーキテクチャ
+## <a name="recommended-mbam-high-level-architecture-with-the-configuration-manager-integration-topology"></a>Configuration Manager 統合トポロジを使用した推奨 MBAM ハイレベル アーキテクチャ
 
 
-次の図と表は、Configuration Manager 統合トポロジでの MBAM の推奨される高レベルアーキテクチャを示しています。 MBAM 複数フォレスト展開には、一方向または双方向の信頼が必要です。 一方向の信頼には、サーバーのドメインがクライアントドメインを信頼する必要があります。
+次の図と表に、Configuration Manager 統合トポロジを使用した MBAM の推奨されるハイレベル アーキテクチャについて説明します。 MBAM マルチフォレスト展開では、一方通行または 2 ウェイの信頼が必要です。 一方通行の信頼では、サーバー ドメインがクライアント ドメインを信頼している必要があります。
 
-![mbam2\-5](images/mbam2-5-cmserver.png)
+![mbam2\-5。](images/mbam2-5-cmserver.png)
 
-### データベースサーバー
+### <a name="database-server"></a>データベース サーバー
 
-#### 回復用データベース
+#### <a name="recovery-database"></a>回復データベース
 
-この機能は、Windows Server とサポートされている SQL Server インスタンスを実行しているコンピューターで構成されます。
+この機能は、サーバーを実行しているコンピューター Windows構成され、インスタンスSQL Serverされます。
 
-**回復データベース**には、Mbam クライアントコンピューターから収集された回復データが格納されます。
+回復 **データベースには、MBAM** クライアント コンピューターから収集された回復データが格納されます。
 
-#### 監査データベース
+#### <a name="audit-database"></a>監査データベース
 
-この機能は、Windows Server とサポートされている SQL Server インスタンスを実行しているコンピューターで構成されます。
+この機能は、サーバーを実行しているコンピューター Windows構成され、インスタンスSQL Serverされます。
 
-**監査データベース**には、回復データにアクセスしたクライアントコンピューターから収集された監査アクティビティデータが格納されます。
+Audit **Database には** 、回復データにアクセスしたクライアント コンピューターから収集された監査アクティビティ データが格納されます。
 
-#### レポート
+#### <a name="reports"></a>レポート
 
-この機能は、Windows Server とサポートされている SQL Server インスタンスを実行しているコンピューターで構成されます。
+この機能は、サーバーを実行しているコンピューター Windows構成され、インスタンスSQL Serverされます。
 
-組織内のクライアントコンピューターの回復監査データは、**レポート**によって提供されます。 レポートは、Configuration Manager コンソールから、または SQL Server Reporting Services から直接表示できます。
+レポート **は** 、企業内のクライアント コンピューターの回復監査データを提供します。 レポートは、Configuration Manager コンソールから、または管理者から直接SQL Server Reporting Services。
 
-### Configuration Manager プライマリサイトサーバー
+### <a name="configuration-manager-primary-site-server"></a>Configuration Manager プライマリ サイト サーバー
 
-System Center Configuration Manager の統合機能
+System Center Configuration Manager統合機能
 
--   この機能は構成マネージャーのプライマリサイトサーバーで構成されます。これは、構成マネージャーインフラストラクチャのトップ層サーバーです。
+-   この機能は、Configuration Manager インフラストラクチャのトップ層サーバーである Configuration Manager プライマリ サイト サーバーで構成されます。
 
--   **Configuration Manager サーバー**は、クライアントコンピューターからハードウェアインベントリ情報を収集し、クライアントコンピューターの BitLocker のコンプライアンスを報告するために使用されます。
+-   **Configuration Manager Server は、** クライアント コンピューターからハードウェア インベントリ情報を収集し、クライアント コンピューターの BitLocker 準拠を報告するために使用されます。
 
--   Microsoft BitLocker の管理と監視のセットアップウィザードを実行してサーバーソフトウェアをインストールする場合、MBAM がサポートするコンピューターのコレクション、構成基準、およびレポートは、Configuration Manager プライマリサイトサーバーで構成されます。
+-   Microsoft BitLocker 管理と監視セットアップ ウィザードを実行してサーバー ソフトウェアをインストールすると、MBAM サポートされているコンピューターのコレクション、構成基準、およびレポートが Configuration Manager プライマリ サイト サーバーで構成されます。
 
--   MBAM サーバーソフトウェアをインストールするコンピューターと同じコンピューターに**Configuration Manager コンソール**をインストールする必要があります。
+-   **Configuration Manager コンソールは、MBAM** Server ソフトウェアをインストールするコンピューターと同じコンピューターにインストールする必要があります。
 
-### 管理と監視サーバー
+### <a name="administration-and-monitoring-server"></a>管理サーバーと監視サーバー
 
-#### 管理と監視の web サイト
+#### <a name="administration-and-monitoring-website"></a>Web サイトの管理と監視
 
-この機能は、Windows Server が実行されているコンピューターで構成されます。
+この機能は、サーバーを実行しているコンピューター Windowsされます。
 
-**管理と監視の web サイト**を使用して、次の操作を行います。
+管理 **および監視 Web サイトは、次の** 場合に使用されます。
 
--   ロックアウトされている場合、エンドユーザーが自分のコンピューターにアクセスできるようにします。(Web サイトのこの領域は、一般にヘルプデスクと呼ばれます)。
+-   エンド ユーザーがロックアウト時にコンピューターへのアクセスを回復するのに役立ちます。(Web サイトのこの領域は、一般にヘルプ デスクと呼ばれる)
 
--   クライアントコンピューターの回復アクティビティが表示されている回復監査レポートを表示します。 その他のレポートは、Configuration Manager コンソールから表示されます。
+-   クライアント コンピューターの回復アクティビティを示す回復監査レポートを表示します。 その他のレポートは、Configuration Manager コンソールから表示されます。
 
-#### セルフサービスポータル
+#### <a name="self-service-portal"></a>セルフサービス ポータル
 
-この機能は、Windows Server が実行されているコンピューターで構成されます。
+この機能は、サーバーを実行しているコンピューター Windowsされます。
 
-**セルフサービスポータル**は、クライアントコンピューターのエンドユーザーが、自分の BitLocker パスワードを紛失または忘れるということを確認するために、個別に web サイトにログオンして回復キーを取得できるようにする web サイトです。
+セルフサービス **ポータルは** 、クライアント コンピューター上のエンド ユーザーが、BitLocker パスワードを紛失または忘れた場合に回復キーを取得するために Web サイトに個別にログオンできる Web サイトです。
 
-#### この web サイトの web サービスを監視する
+#### <a name="monitoring-web-services-for-this-website"></a>この Web サイトの Web サービスの監視
 
-この機能は、Windows Server が実行されているコンピューターにインストールされています。
+この機能は、サーバーを実行しているコンピューター Windowsされます。
 
-この**監視 web サービス**は、Mbam クライアントと web サイトでデータベースと通信するために使用されます。
+監視 **Web サービスは** 、MBAM クライアントと Web サイトがデータベースと通信するために使用します。
 
-**重要**<br>MBAM web サイトは、回復データベースと直接通信しているため、監視 Web サービスは Microsoft BitLocker の管理と監視 (MBAM) 2.5 SP1 では利用できなくなりました。 
+**重要**<br>MbAM Web サイトは回復データベースと直接通信するために、Microsoft BitLocker Administration and Monitoring (MBAM) 2.5 SP1 で監視 Web サービスを使用できなくなりました。 
 
  
 
-### 管理ワークステーション
+### <a name="management-workstation"></a>管理ワークステーション
 
-#### MBAM グループポリシーテンプレート
+#### <a name="mbam-group-policy-templates"></a>MBAM グループ ポリシー テンプレート
 
--   **Mbam グループポリシーテンプレート**は、BitLocker ドライブ暗号化を管理するための、mbam の実装設定を定義するグループポリシー設定です。
+-   **MBAM グループ ポリシー テンプレート**は、MBAM の実装設定を定義するグループ ポリシー設定で、BitLocker ドライブの暗号化を管理できます。
 
--   MBAM を実行する前に、グループポリシーテンプレートをダウンロードして、 [MDOP グループポリシー (admx) テンプレートを取得](https://go.microsoft.com/fwlink/p/?LinkId=393941)し、サポートされている windows サーバーまたは windows オペレーティングシステムを実行しているサーバーまたはワークステーションにコピーする必要があります。
+-   MBAM を実行する前に、[MDOP グループ ポリシー [(.admx)](https://go.microsoft.com/fwlink/p/?LinkId=393941)テンプレートを取得する方法] からグループ ポリシー テンプレートをダウンロードし、サポートされている Windows Server または Windows オペレーティング システムを実行しているサーバーまたはワークステーションにコピーする必要があります。
 
-    **注**<br>ワークステーションは専用のコンピュータである必要はありません。
+    **注**<br>ワークステーションは専用のコンピューターである必要はない。
 
      
 
-### MBAM クライアントと Configuration Manager クライアントコンピューター
+### <a name="mbam-client-and-configuration-manager-client-computer"></a>MBAM クライアント および Configuration Manager クライアント コンピューター
 
-#### MBAM クライアントソフトウェア
+#### <a name="mbam-client-software"></a>MBAM クライアント ソフトウェア
 
-**Mbam クライアント**:
+**MBAM クライアント**:
 
--   グループポリシーオブジェクトを使用して、企業内のクライアントコンピューターで BitLocker ドライブ暗号化を適用します。
+-   グループ ポリシー オブジェクトを使用して、企業のクライアント コンピューターに BitLocker ドライブの暗号化を適用します。
 
--   オペレーティングシステムドライブ、固定データドライブ、およびリムーバブル (USB) データドライブの3種類のデータドライブの BitLocker 回復キーを収集します。
+-   オペレーティング システム ドライブ、固定データ ドライブ、リムーバブル (USB) データ ドライブの 3 種類の BitLocker 回復キーを収集します。
 
--   クライアントコンピューターに関する回復情報とコンピューターに関する情報を収集します。
+-   クライアント コンピューターに関する回復情報とコンピューター情報を収集します。
 
-#### 構成マネージャー クライアント
+#### <a name="configuration-manager-client"></a>構成マネージャー クライアント
 
-Configuration manager**クライアント**は、クライアントコンピューターに関するハードウェア互換性データを収集し、コンプライアンス情報を報告できるようにします。
+**Configuration Manager クライアントを使用**すると、Configuration Manager はクライアント コンピューターに関するハードウェア互換性データを収集し、コンプライアンス情報を報告できます。
 
  
 
-## サポートされている Configuration Manager バージョン向けの MBAM 展開の相違点
+## <a name="differences-in-mbam-deployment-for-supported-configuration-manager-versions"></a>サポートされている Configuration Manager バージョンの MBAM 展開の違い
 
 
-Configuration Manager の統合トポロジを使用して MBAM を展開する場合は、プライマリサイトサーバーに MBAM をインストールできます。 ただし、MBAM インストールの動作は、システム Center2012 構成マネージャーと構成 Manager2007 によって異なります。
+Configuration Manager 統合トポロジを使用して MBAM を展開する場合は、プライマリ サイト サーバーに MBAM をインストールできます。 ただし、MBAM インストールは、2012 Configuration Manager と Configuration Manager 2007 System Centerの動作が異なります。
 
 <table>
 <colgroup>
@@ -183,25 +184,25 @@ Configuration Manager の統合トポロジを使用して MBAM を展開する�
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><p>System Center2012 R2 構成マネージャー</p>
-<p>System Center2012 Configuration Manager</p></td>
-<td align="left"><p>MBAM をプライマリサイトサーバーまたはサーバーの全体管理サーバーにインストールする場合、MBAM はそのサイトサーバー上のすべてのインストールアクションを実行します。</p></td>
+<td align="left"><p>System Center 2012 R2 Configuration Manager</p>
+<p>System Center 2012 Configuration Manager</p></td>
+<td align="left"><p>MBAM をプライマリ サイト サーバーまたはサーバーの全体管理サーバーにインストールする場合、MBAM は、そのサイト サーバー上のすべてのインストール 操作を実行します。</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>構成 Manager2007 R2</p>
-<p>構成 Manager2007</p></td>
-<td align="left"><p>大規模なサイトの親サーバーを持つ大きな Configuration Manager 階層の一部であるプライマリサイトサーバーに MBAM をインストールする場合、MBAM はセントラルサイトの親サーバーを識別し、その親サーバー上のすべてのインストールアクションを実行します。 インストールには、前提条件の確認および Configuration Manager のオブジェクトとレポートのインストールが含まれます。</p>
-<p>たとえば、セントラルサイトの親サーバーの子であるプライマリサイトサーバーに MBAM をインストールすると、MBAM は親サーバー上のすべての Configuration Manager オブジェクトとレポートをインストールします。 MBAM を親サーバーにインストールする場合、MBAM はその親サーバー上のすべてのインストールアクションを実行します。</p></td>
+<td align="left"><p>Configuration Manager 2007 R2</p>
+<p>Configuration Manager 2007</p></td>
+<td align="left"><p>中央サイトの親サーバーを持つ大規模な Configuration Manager 階層の一部であるプライマリ サイト サーバーに MBAM をインストールすると、MBAM は中央サイトの親サーバーを識別し、その親サーバー上のすべてのインストール 操作を実行します。 インストールには、前提条件の確認と Configuration Manager オブジェクトとレポートのインストールが含まれます。</p>
+<p>たとえば、中央サイトの親サーバーの子であるプライマリ サイト サーバーに MBAM をインストールすると、MBAM は、すべての Configuration Manager オブジェクトとレポートを親サーバーにインストールします。 MBAM を親サーバーにインストールすると、MBAM は、その親サーバー上のすべてのインストール 操作を実行します。</p></td>
 </tr>
 </tbody>
 </table>
 
  
 
-## 構成マネージャーを使用した MBAM の動作
+## <a name="how-mbam-works-with-configuration-manager"></a>構成マネージャーでの MBAM の動作
 
 
-MBAM と Configuration Manager の統合は、次の表で説明されている項目をインストールする構成パックに基づいています。
+MBAM と Configuration Manager の統合は、次の表に示すアイテムをインストールする構成パックに基づいて行います。
 
 <table>
 <colgroup>
@@ -210,37 +211,37 @@ MBAM と Configuration Manager の統合は、次の表で説明されている�
 </colgroup>
 <thead>
 <tr class="header">
-<th align="left">構成マネージャーにインストールされたアイテム</th>
+<th align="left">Configuration Manager にインストールされているアイテム</th>
 <th align="left">説明</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="left"><p>構成データ</p></td>
-<td align="left"><p>構成データは、次の2つの構成項目を含む、"BitLocker Protection" と呼ばれる構成基準をインストールします。</p>
+<td align="left"><p>構成データは、次の 2 つの構成項目を含む "BitLocker Protection" と呼ばれる構成基準をインストールします。</p>
 <ul>
-<li><p>BitLocker オペレーティングシステムドライブの保護</p></li>
-<li><p>BitLocker 固定データドライブの保護</p></li>
+<li><p>BitLocker オペレーティング システム ドライブ保護</p></li>
+<li><p>BitLocker 固定データ ドライブ保護</p></li>
 </ul>
-<p>構成基準は、mbam でサポートされているコンピューターのコレクションに展開されます。これは、MBAM をインストールしたときにも作成されます。</p>
-<p>2つの構成項目は、クライアントコンピューターのコンプライアンスの状態を評価するための基礎となります。 この情報は、構成マネージャーでキャプチャ、保存、評価されます。</p>
-<p>構成項目は、オペレーティングシステムドライブと固定データドライブのコンプライアンス要件に基づいています。 展開されたコンピューターに必要な詳細情報が収集されて、それらのドライブの種類のコンプライアンスが評価されるようになります。</p>
-<p>既定では、構成基準はコンプライアンスの状態の every12 hours を評価し、コンプライアンスデータを Configuration Manager に送信します。</p></td>
+<p>構成基準は、MBAM のインストール時にも作成される MBAM サポートされているコンピューター コレクションに展開されます。</p>
+<p>2 つの構成項目は、クライアント コンピューターのコンプライアンス状態を評価するための基礎となります。 この情報は、Configuration Manager でキャプチャ、保存、および評価されます。</p>
+<p>構成項目は、オペレーティング システム ドライブと固定データ ドライブのコンプライアンス要件に基づいて行います。 展開されたコンピューターに必要な詳細が収集され、それらのドライブの種類に対するコンプライアンスを評価できます。</p>
+<p>既定では、構成基準は 12 時間ごとにコンプライアンス状態を評価し、コンプライアンス データを Configuration Manager に送信します。</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>MBAM サポートされているコンピューターコレクション</p></td>
-<td align="left"><p>MBAM サポートされているコンピューターと呼ばれるコレクションを作成します。 構成基準は、このコレクション内のクライアントコンピューターを対象としています。</p>
-<p>これは動的なコレクションです。 既定では、every12 時間が実行され、次の3つの条件に基づいてメンバーシップが評価されます。</p>
+<td align="left"><p>MBAM サポートされているコンピューター コレクション</p></td>
+<td align="left"><p>MBAM は、MBAM サポートされているコンピューターと呼ばれるコレクションを作成します。 構成基準は、このコレクション内のクライアント コンピューターを対象とします。</p>
+<p>これは動的コレクションです。 既定では、12 時間ごとに実行され、3 つの条件に基づいてメンバーシップが評価されます。</p>
 <ul>
-<li><p>コンピューターは、サポートされている Windows オペレーティングシステムのバージョンです。</p></li>
+<li><p>コンピューターは、サポートされているバージョンのオペレーティング システムWindowsです。</p></li>
 <li><p>コンピューターは物理コンピューターです。 仮想マシンはサポートされていません。</p></li>
-<li><p>コンピューターには、利用可能なトラステッドプラットフォームモジュール (TPM) があります。 Windows7 には、互換性のあるバージョンの TPM 1.2 以降が必要です。 Windows 10、Windows 8.1、Windows8、および Windows To Go では、TPM は必要ありません。</p></li>
+<li><p>コンピューターには、利用可能なトラステッド プラットフォーム モジュール (TPM) があります。 互換性のあるバージョンの TPM 1.2 以降は、7 以降Windowsです。 Windows 10、Windows 8.1、Windows 8、Windows移動には TPM は必要ではありません。</p></li>
 </ul>
-<p>コレクションは、すべてのコンピューターに対して評価され、互換性のあるコンピューターのサブセットが作成されます。これにより、MBAM 統合のコンプライアンス評価と報告の基礎が提供されます。</p></td>
+<p>コレクションは、すべてのコンピューターに対して評価され、互換性のあるコンピューターのサブセットが作成され、MBAM 統合のコンプライアンス評価とレポート作成の基礎となります。</p></td>
 </tr>
 <tr class="odd">
 <td align="left"><p>レポート</p></td>
-<td align="left"><p>Configuration Manager の統合トポロジで MBAM を構成すると、[Configuration Manager] ですべてのレポートを表示します。回復監査レポートは、従来の MBAM 管理と監視の Web サイトで引き続き表示されます。 構成マネージャーで利用可能なレポートは、次のとおりです。</p>
+<td align="left"><p>Configuration Manager 統合トポロジを使用して MBAM を構成すると、回復監査レポートを除くすべてのレポートが Configuration Manager に表示され、そのレポートは MBAM 管理および監視 Web サイトで引き続き表示されます。 Configuration Manager で使用できるレポートは次のとおりです。</p>
 <table>
 <colgroup>
 <col width="50%" />
@@ -254,24 +255,24 @@ MBAM と Configuration Manager の統合は、次の表で説明されている�
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><p>BitLocker エンタープライズコンプライアンスダッシュボード</p></td>
-<td align="left"><p>IT 管理者に対して、1つのレポート内の情報の3つのビューを提供します。これは、コンプライアンスステータスの配布、非準拠–エラーの分布、およびドライブの種類別のコンプライアンスステータスの配布です。 レポートのドリルダウンオプションを使用すると、IT 管理者はデータをクリックして、選択した状態に一致するコンピューターの一覧を表示することができます。</p></td>
+<td align="left"><p>BitLocker エンタープライズコンプライアンス ダッシュボード</p></td>
+<td align="left"><p>IT 管理者は、1 つのレポートで 3 つのビューの情報を提供します。コンプライアンス状態の配布、非準拠 - エラーの配布、およびドライブの種類別のコンプライアンス状態の配布。 レポートのドリルダウン オプションを使用すると、IT 管理者はデータをクリックし、選択した状態に一致するコンピューターの一覧を表示できます。</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>BitLocker Enterprise コンプライアンスの詳細</p></td>
-<td align="left"><p>IT 管理者は、企業の BitLocker 暗号化のコンプライアンスステータスに関する情報を表示し、各コンピューターのコンプライアンスの状態を含めることができます。 レポートのドリルダウンオプションを使用すると、IT 管理者はデータをクリックして、選択した状態に一致するコンピューターの一覧を表示することができます。</p></td>
+<td align="left"><p>BitLocker エンタープライズコンプライアンスの詳細</p></td>
+<td align="left"><p>IT 管理者は、企業の BitLocker 暗号化コンプライアンス状態に関する情報を表示し、各コンピューターのコンプライアンス状態を含めます。 レポートのドリルダウン オプションを使用すると、IT 管理者はデータをクリックし、選択した状態に一致するコンピューターの一覧を表示できます。</p></td>
 </tr>
 <tr class="odd">
 <td align="left"><p>BitLocker コンピューターのコンプライアンス</p></td>
-<td align="left"><p>IT 管理者が個々のコンピューターを表示し、それが準拠しているかどうかについて報告された理由を確認できます。 このレポートには、オペレーティングシステムドライブと固定データドライブの暗号化状態も表示されます。</p></td>
+<td align="left"><p>IT 管理者は、個々のコンピューターを表示し、準拠または準拠していない状態で報告された理由を特定できます。 このレポートには、オペレーティング システム ドライブと固定データ ドライブの暗号化状態も表示されます。</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>BitLocker Enterprise コンプライアンスの概要</p></td>
-<td align="left"><p>IT 管理者は、組織内の MBAM ポリシーのコンプライアンスの状態を表示できます。 各コンピューターの状態が評価され、ポリシーに対する企業内のすべてのコンピューターのコンプライアンスの概要がレポートに表示されます。 レポートのドリルダウンオプションを使用すると、IT 管理者はデータをクリックして、選択した状態に一致するコンピューターの一覧を表示することができます。</p></td>
+<td align="left"><p>BitLocker エンタープライズコンプライアンスの概要</p></td>
+<td align="left"><p>IT 管理者は、企業の MBAM ポリシーコンプライアンスの状態を表示できます。 各コンピューターの状態が評価され、ポリシーに対する企業内のすべてのコンピューターのコンプライアンスの概要がレポートに表示されます。 レポートのドリルダウン オプションを使用すると、IT 管理者はデータをクリックし、選択した状態に一致するコンピューターの一覧を表示できます。</p></td>
 </tr>
 </tbody>
 </table>
-<p> </p></td>
+<p> </p></td>
 </tr>
 </tbody>
 </table>
@@ -279,7 +280,7 @@ MBAM と Configuration Manager の統合は、次の表で説明されている�
  
 
 
-## 関連トピック
+## <a name="related-topics"></a>関連トピック
 
 
 [MBAM 2.5 をお使いになる前に](getting-started-with-mbam-25.md)
@@ -291,9 +292,9 @@ MBAM と Configuration Manager の統合は、次の表で説明されている�
  
 
  
-## MBAM の提案をお寄せください。
-- [ここで](http://mbam.uservoice.com/forums/268571-microsoft-bitlocker-administration-and-monitoring)候補を追加または投票してください。 
-- MBAM の問題については、 [Mbam TechNet フォーラムをご覧](https://social.technet.microsoft.com/Forums/home?forum=mdopmbam)ください。
+## <a name="got-a-suggestion-for-mbam"></a>MBAM の提案を受け取った場合
+- ここで提案を追加または投票 [します](http://mbam.uservoice.com/forums/268571-microsoft-bitlocker-administration-and-monitoring)。 
+- MBAM の問題については [、MBAM TechNet フォーラムを使用します](https://social.technet.microsoft.com/Forums/home?forum=mdopmbam)。
 
 
 

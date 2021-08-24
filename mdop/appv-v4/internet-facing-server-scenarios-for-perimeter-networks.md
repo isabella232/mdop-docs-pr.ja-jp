@@ -11,54 +11,55 @@ ms.mktglfcycl: deploy
 ms.sitesec: library
 ms.prod: w10
 ms.date: 08/30/2016
-ms.openlocfilehash: fcb04e651341fa107c358eaabbd7992d7ea155ec
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: 7415cf7a97edc646653df552723667bac8d25fdc
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10816284"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910692"
 ---
-# 境界ネットワークのインターネットに接続されたサーバーのシナリオ
+# <a name="internet-facing-server-scenarios-for-perimeter-networks"></a>境界ネットワークのインターネットに接続されたサーバーのシナリオ
 
 
-App-v 4.5 は、ネットワークに接続されていない、またはネットワークから切断されたユーザーが引き続きアプリを使用できるようにする、インターネットに接続しているサーバーのシナリオをサポートします。 次の図に示すように、インターネット (RTSPS および HTTPS) でのセキュリティで保護されたプロトコルの使用のみがサポートされています。
+App-V 4.5 では、企業ネットワークに接続されていないユーザーやネットワークから切断したユーザーが App-V を使用できる、インターネットに接続するサーバー シナリオがサポートされています。 次の図に示すように、インターネットでのセキュリティで保護されたプロトコル (RTSPS と HTTPS) の使用だけがサポートされています。
 
-![app-v ファイアウォールの配置図](images/appvfirewalls.gif)
+![app-v ファイアウォールの配置図。](images/appvfirewalls.gif)
 
-ISA Server を使用して、次の方法で App-v インフラストラクチャが内部ネットワーク上にある ISA Server を使用して、インターネット向けソリューションをセットアップできます。
+インターネットに接続するソリューションは、ISA Server を使用してセットアップできます。ここで、App-V インフラストラクチャは内部ネットワーク上に次の方法で置きます。
 
--   ICO ファイルと OSD ファイルをホストしている IIS サーバー用の Web 公開ルールを作成します。また、必要に応じて、ストリーミング用のパッケージを内部ネットワーク上に配置します。 詳細な手順については <https://go.microsoft.com/fwlink/?LinkId=151982> 、をご覧ください。
+-   ICO ファイルと OSD ファイルをホストしている IIS サーバーの Web 発行ルールを作成し、必要に応じてストリーミング用のパッケージを内部ネットワーク上に作成します。 詳細な手順については、 を参照してください <https://go.microsoft.com/fwlink/?LinkId=151982> 。
 
--   App-v Web Management Server (RTSPS) のサーバー公開ルールを作成します。 詳細な手順については [https://go.microsoft.com/fwlink/?LinkId=151983&](https://go.microsoft.com/fwlink/?LinkId=151983) 、をご覧ください。
+-   App-V Web 管理サーバー (RTSPS) のサーバー発行ルールを作成します。 詳細な手順については、 を参照してください [https://go.microsoft.com/fwlink/?LinkId=151983&](https://go.microsoft.com/fwlink/?LinkId=151983) 。
 
-次の図に示すように、クライアントと ISA Server の間、または ISA Server と内部ネットワークの間で、インフラストラクチャが他のファイアウォールを実装している場合は、RTSPS (TCP 322) と HTTPS (TCP 443) の両方のファイアウォールルールを作成して、トラフィックフローをサポートする必要があります。 また、ISA Server と内部ネットワークの間にファイアウォールが実装されている場合は、ドメインメンバーに必要な既定のトラフィックをファイアウォール (DNS、LDAP、Kerberos、SMB/CIFS) でトンネリングすることを許可する必要があります。
+次の図に示すように、インフラストラクチャがクライアントと ISA Server の間、または ISA Server と内部ネットワークの間に他のファイアウォールを実装している場合は、トラフィックのフローをサポートするために RTSPS (TCP 322) と HTTPS (TCP 443) ファイアウォールルールの両方を作成する必要があります。 また、ISA Server と内部ネットワークの間にファイアウォールが実装されている場合は、ドメイン メンバーに必要な既定のトラフィックがファイアウォール (DNS、LDAP、Kerberos、SMB/CIFS) を通過できる必要があります。
 
-![app v 境界ネットワークファイアウォールの図](images/appvperimeternetworkfirewall.gif)
+![app-v 境界ネットワークファイアウォール図。](images/appvperimeternetworkfirewall.gif)
 
-ファイアウォールの解決策は環境によって異なるため、このトピックで示されているガイダンスでは、インターネットに接続された App-v 環境を境界ネットワークで構成するために必要なトラフィックについて説明します。 この情報には、推奨される内部ネットワークサーバーも含まれます。
+ファイアウォール ソリューションは環境によって異なりますので、このトピックで示すガイダンスでは、境界ネットワークでインターネットに接続する App-V 環境を構成するために必要なトラフィックについて説明します。 この情報には、推奨される内部ネットワーク サーバーも含まれます。
 
 境界ネットワークに次のサーバーを配置します。
 
--   App-v Management Server
+-   App-V 管理サーバー
 
--   公開とストリーミング用の IIS サーバー
+-   発行およびストリーミング用の IIS サーバー
 
-**注** 管理サーバーと IIS サーバーを別々のコンピューターに配置することをお勧めします。
+**備考**  
+管理サーバーと IIS サーバーを個別のコンピューターに配置するベスト プラクティスです。
 
  
 
-次のサーバーを内部ネットワークに配置します。
+内部ネットワークに次のサーバーを配置します。
 
--   Content server
+-   コンテンツ サーバー
 
--   データストア (SQL Server)
+-   データ ストア (SQL Server)
 
--   Active Directory ドメインコントローラー
+-   Active Directory ドメイン コントローラー
 
-## トラフィック要件
+## <a name="traffic-requirements"></a>トラフィック要件
 
 
-次の表に、インターネットおよび境界ネットワークと、境界ネットワークから内部ネットワークへの通信のトラフィック要件を示します。
+次の表に、インターネットと境界ネットワーク、境界ネットワークから内部ネットワークへの通信のトラフィック要件を示します。
 
 <table>
 <colgroup>
@@ -73,12 +74,12 @@ ISA Server を使用して、次の方法で App-v インフラストラクチ�
 </thead>
 <tbody>
 <tr class="odd">
-<td align="left"><p>RTSPS (公開の更新およびストリーミングパッケージ)</p></td>
-<td align="left"><p>既定では TCP 322これは、App-v Management Server で変更できます。</p></td>
+<td align="left"><p>RTSPS (更新パッケージとストリーミング パッケージの発行)</p></td>
+<td align="left"><p>既定では TCP 322。これは、App-V 管理サーバーで変更できます。</p></td>
 </tr>
 <tr class="even">
-<td align="left"><p>HTTPS (ICO ファイルと OSD ファイル、ストリーミングパッケージ)</p></td>
-<td align="left"><p>既定では TCP 443これは、IIS 構成で変更できます。</p></td>
+<td align="left"><p>HTTPS (発行 ICO および OSD ファイルとストリーミング パッケージ)</p></td>
+<td align="left"><p>既定では TCP 443。これは IIS 構成で変更できます。</p></td>
 </tr>
 </tbody>
 </table>
@@ -99,11 +100,11 @@ ISA Server を使用して、次の方法で App-v インフラストラクチ�
 <tbody>
 <tr class="odd">
 <td align="left"><p>SQL Server</p></td>
-<td align="left"><p>TCP 1433 は既定のままですが、SQL Server で構成できます。</p></td>
+<td align="left"><p>TCP 1433 は既定ですが、既定で構成SQL Server。</p></td>
 </tr>
 <tr class="even">
 <td align="left"><p>SMB/CIFS</p></td>
-<td align="left"><p>コンテンツディレクトリが管理サーバーまたは IIS サーバーからリモートで配置されている場合 (推奨)</p></td>
+<td align="left"><p>コンテンツ ディレクトリが管理サーバーまたは IIS サーバーからリモートに存在する場合 (推奨)。</p></td>
 </tr>
 <tr class="odd">
 <td align="left"><p>Kerberos</p></td>
@@ -115,7 +116,7 @@ ISA Server を使用して、次の方法で App-v インフラストラクチ�
 </tr>
 <tr class="odd">
 <td align="left"><p>DNS</p></td>
-<td align="left"><p>内部リソースの名前解決 (境界ネットワークサーバー上のホストのファイルを使用して除去可能)</p></td>
+<td align="left"><p>内部リソースの名前解決のために (境界ネットワーク サーバーでホストのファイルを使用すると削除できます)</p></td>
 </tr>
 </tbody>
 </table>

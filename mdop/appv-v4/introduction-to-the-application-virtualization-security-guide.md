@@ -1,6 +1,6 @@
 ---
-title: Application Virtualization セキュリティガイドの概要
-description: Application Virtualization セキュリティガイドの概要
+title: アプリケーション仮想化セキュリティ ガイドの概要
+description: アプリケーション仮想化セキュリティ ガイドの概要
 author: dansimp
 ms.assetid: 50e1d220-7a95-45b8-933b-3dadddebe26f
 ms.reviewer: ''
@@ -11,71 +11,73 @@ ms.mktglfcycl: deploy
 ms.sitesec: library
 ms.prod: w10
 ms.date: 08/30/2016
-ms.openlocfilehash: 4b41c65c5ad753aa606d47d2eafe4a28e035cc4e
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
+ms.openlocfilehash: 82914de48a5a5777f6ce4b50fe3e8af34dd82494
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
 ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10816267"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910782"
 ---
-# Application Virtualization セキュリティガイドの概要
+# <a name="introduction-to-the-application-virtualization-security-guide"></a>アプリケーション仮想化セキュリティ ガイドの概要
 
 
-この Microsoft Application Virtualization (App-v) セキュリティガイドには、App-v の展開用に選択されたセキュリティ機能の構成を担当する管理者向けの手順が記載されています。
+この Microsoft Application Virtualization (App-V) セキュリティ ガイドには、App-V 展開で選択されたセキュリティ機能の構成を担当する管理者向け手順が記載されています。
 
-**注** このドキュメントでは、特定のセキュリティオプションを選ぶためのガイダンスは提供していません。 この情報については、「App V セキュリティのベストプラクティス」をご覧 <https://go.microsoft.com/fwlink/?LinkId=127120> ください。
+**備考**  
+このドキュメントでは、特定のセキュリティ オプションを選択するためのガイダンスは提供されていない。 この情報は、App-V セキュリティのベスト プラクティスに関するホワイト ペーパーで提供されています <https://go.microsoft.com/fwlink/?LinkId=127120> 。
 
  
 
-このガイドを使用する App-v 管理者として、次のセキュリティ関連テクノロジに精通している必要があります。
+このガイドを使用する App-V 管理者は、次のセキュリティ関連テクノロジについて理解している必要があります。
 
 -   Active Directory Domain Services
 
--   公開キー基盤 (PKI)
+-   公開キーインフラストラクチャ (PKI)
 
--   インターネットプロトコルセキュリティ (IPsec)
+-   インターネット プロトコル セキュリティ (IPsec)
 
--   グループポリシー
+-   グループ ポリシー
 
--   インターネットインフォメーションサービス (IIS)
+-   インターネット インフォメーション サービス (IIS)
 
-## APP-V インフラストラクチャコンポーネント
+## <a name="app-v-infrastructure-components"></a>APP-V インフラストラクチャ コンポーネント
 
 
-セキュリティで保護されたアプリを拡張する環境を計画するときは、いくつかの異なるインフラストラクチャモデルを検討することができます。
+拡張セキュリティ App-V 環境を計画する場合は、いくつかの異なるインフラストラクチャ モデルを検討できます。
 
-**注** App-v インフラストラクチャモデルの詳細については、次のドキュメントを参照してください。
+**備考**  
+App-V インフラストラクチャ モデルの詳細については、次のドキュメントを参照してください。
 
--   [App-v の計画と展開ガイド](https://go.microsoft.com/fwlink/?LinkId=122063)
+-   [App-V の計画と展開ガイド](https://go.microsoft.com/fwlink/?LinkId=122063)
 
--   [インフラストラクチャ計画と設計ガイドシリーズ](https://go.microsoft.com/fwlink/?LinkId=151986)
+-   [インフラストラクチャの計画と設計ガイド シリーズ](https://go.microsoft.com/fwlink/?LinkId=151986)
 
  
 
-これらのモデルでは、次の図に示すように、一部の App-v コンポーネントを使用することはできません。
+これらのモデルは、次の図に示す App-V コンポーネントの一部を使用しますが、一部のコンポーネントを使用している可能性があります。
 
-![app-v ブランチオフィスダイアグラム](images/appvbranchoffices.gif)
+![app-v ブランチ オフィスの図。](images/appvbranchoffices.gif)
 
-<a href="" id="application-virtualization--app-v--management-server"></a>Application Virtualization (App V) Management Server  
-App-v 管理サーバーは、パッケージコンテンツをストリームし、ショートカットとファイルの種類の関連付けを App-v クライアントに公開します。 App-v 管理サーバーでは、アクティブなアップグレード、ライセンス管理、およびレポートに使用できるデータベースもサポートされています。
+<a href="" id="application-virtualization--app-v--management-server"></a>アプリケーション仮想化 (App-V) 管理サーバー  
+App-V 管理サーバーは、パッケージ コンテンツをストリーミングし、ショートカットとファイルの種類の関連付けを App-V クライアントに発行します。 App-V 管理サーバーは、アクティブなアップグレード、ライセンス管理、およびレポート作成に使用できるデータベースもサポートします。
 
-<a href="" id="application-virtualization--app-v--streaming-server"></a>Application Virtualization (App-v) Streaming Server  
-App-v ストリーミングサーバーは、ブランチオフィスなどの環境で、app-v クライアントにストリーミングするためのパッケージをホストします。これは、パッケージコンテンツをクライアントにストリーミング配信するための帯域幅が十分でない場合です。 ストリーミングサーバーにはストリーミング機能のみが含まれており、App-v の管理コンソールまたは App-v の管理 Web サービスを利用することはできません。
+<a href="" id="application-virtualization--app-v--streaming-server"></a>アプリケーション仮想化 (App-V) ストリーミング サーバー  
+App-V ストリーミング サーバーは、ブランチ オフィスなどの環境で App-V クライアントにストリーミングするパッケージをホストします。App-V 管理サーバーへの接続の帯域幅がクライアントにパッケージコンテンツをストリーミングするには不十分です。 ストリーミング サーバーにはストリーミング機能だけが含まれているので、App-V 管理コンソールまたは App-V 管理 Web サービスは提供されません。
 
-<a href="" id="application-virtualization--app-v--data-store"></a>Application Virtualization (App-v) データストア  
-SQL データベースの App-v データストアは、App-v インフラストラクチャに関連する情報を保持します。 App-v データストアの情報には、すべてのアプリケーションレコード、アプリケーションの割り当て、およびアプリケーションの仮想化環境を管理するグループが含まれます。
+<a href="" id="application-virtualization--app-v--data-store"></a>アプリケーション仮想化 (App-V) データ ストア  
+App-V データ ストアは、SQLデータベース内に、App-V インフラストラクチャに関連する情報を保持します。 App-V データ ストアの情報には、すべてのアプリケーション レコード、アプリケーション割り当て、およびアプリケーション仮想化環境を管理するグループが含まれます。
 
-<a href="" id="application-virtualization--app-v--management-service"></a>Application Virtualization (App-v) 管理サービス  
-App-v 管理サービスは、読み取り/書き込み要求をアプリケーションの仮想化データストアに伝達します。 このコンポーネントは、App-v Management Server と同じコンピューター、または IIS がインストールされている別のコンピューターにインストールできます。
+<a href="" id="application-virtualization--app-v--management-service"></a>アプリケーション仮想化 (App-V) 管理サービス  
+App-V Management Service は、読み取り/書き込み要求をアプリケーション仮想化データ ストアに伝達します。 このコンポーネントは、App-V 管理サーバーと同じコンピューターにインストールするか、IIS がインストールされている別のコンピューターにインストールできます。
 
-<a href="" id="application-virtualization--app-v--management-console"></a>Application Virtualization (App V) 管理コンソール  
-App-v 管理コンソールは、app-v Server 管理のスナップイン管理ユーティリティです。 このコンポーネントは、App-v Server と同じコンピューター上にインストールすることも、MMC 3.0 との別のワークステーションにインストールすることもできます。NET 2.0 がインストールされています。
+<a href="" id="application-virtualization--app-v--management-console"></a>アプリケーション仮想化 (App-V) 管理コンソール  
+App-V 管理コンソールは、App-V Server 管理用のスナップイン管理ユーティリティです。 このコンポーネントは、App-V Server と同じコンピューターにインストールするか、MMC 3.0 と .NET 2.0 がインストールされている別のワークステーションにインストールできます。
 
-<a href="" id="application-virtualization--app-v--sequencer"></a>Application Virtualization (App-v) Sequencer  
-App-v Sequencer は、アプリケーションのインストールを監視してキャプチャし、仮想アプリケーションパッケージを作成します。 Sequencer の出力は、アプリケーションアイコン、アプリケーション定義情報を含む OSD ファイル、パッケージマニフェストファイル、およびアプリケーションのコンテンツファイルを含む SFT ファイルで構成されます。 必要に応じて、App-v インフラストラクチャを使わずに、パッケージをインストールするための Windows Installer ファイルを作成できます。
+<a href="" id="application-virtualization--app-v--sequencer"></a>アプリケーション仮想化 (App-V) シーケンサー  
+App-V Sequencer は、アプリケーションのインストールを監視およびキャプチャし、仮想アプリケーション パッケージを作成します。 Sequencer の出力は、アプリケーション アイコン、アプリケーション定義情報を含む OSD ファイル、パッケージ マニフェスト ファイル、およびアプリケーションのコンテンツ ファイルを含む SFT ファイルで構成されます。 必要に応じてWindows App-V インフラストラクチャを使用せずにパッケージをインストールする場合は、新しいインストーラー ファイルを作成できます。
 
-<a href="" id="application-virtualization--app-v--client"></a>Application Virtualization (App-v) クライアント  
-App-v クライアントは、app-v デスクトップクライアントコンピューターまたは App-v ターミナルサービスクライアントコンピューターにインストールされます。 仮想アプリケーションパッケージの仮想環境を提供します。 App-v クライアントは、アプリへのパッケージストリーミング、仮想アプリケーション発行の更新、アプリケーション仮想化サーバーとの操作を管理します。
+<a href="" id="application-virtualization--app-v--client"></a>アプリケーション仮想化 (App-V) クライアント  
+App-V クライアントは、App-V デスクトップ クライアント コンピューターまたは App-V ターミナル サービス クライアント コンピューターにインストールされます。 仮想アプリケーション パッケージの仮想環境を提供します。 App-V クライアントは、キャッシュへのパッケージ ストリーミング、仮想アプリケーション発行の更新、およびアプリケーション仮想化サーバーとの対話を管理します。
 
  
 

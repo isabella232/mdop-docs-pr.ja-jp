@@ -8,14 +8,14 @@ ms.mktglfcycl: deploy
 ms.sitesec: library
 ms.prod: w10
 ms.date: 04/19/2017
-ms.openlocfilehash: 573b8bb2027e5c7f117a8254005a43c656f047a9
-ms.sourcegitcommit: 354664bc527d93f80687cd2eba70d1eea024c7c3
-ms.translationtype: HT
+ms.openlocfilehash: 79748e04ae1a59afdc8f9dae3c5dc77c50e3c253
+ms.sourcegitcommit: 3e0500abde44d6a09c7ac8e3caf5e25929b490a4
+ms.translationtype: MT
 ms.contentlocale: ja-JP
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "10795816"
+ms.lasthandoff: 08/23/2021
+ms.locfileid: "11910542"
 ---
-# Microsoft User Experience Virtualization (UE-V) 2.x
+# <a name="microsoft-user-experience-virtualization-ue-v-2x"></a>Microsoft User Experience Virtualization (UE-V) 2.x
 
 >[!NOTE]
 >このドキュメントは、Microsoft Desktop Optimization Pack (MDOP) に含まれていた UE-V のバージョンを対象としています。 Windows 10 Enterprise に含まれている UE-V の最新バージョンについては、「[UE-V の開始する](https://docs.microsoft.com/windows/configuration/ue-v/uev-getting-started)」を参照してください。
@@ -33,12 +33,12 @@ Microsoft User Experience Virtualization (UE-V) 2.0 または 2.1 を実装す�
 
 -   ハードウェアの交換またはアップグレード後、または仮想マシンを初期状態に再イメージングした後に、設定を回復する。
 
-## UE-V 2.x のコンポーネント
+## <a name="components-of-ue-v-2x"></a>UE-V 2.x のコンポーネント
 
 
 次の図は、展開された UE-V が連携して設定を同期する方法を示しています。
 
-![UEV2 アーキテクチャの図](images/uev2archdiagram.gif)
+![uev2 アーキテクチャ図。](images/uev2archdiagram.gif)
 
 <table>
 <colgroup>
@@ -89,7 +89,7 @@ Microsoft User Experience Virtualization (UE-V) 2.0 または 2.1 を実装す�
 
 
 
-### <a href="" id="customapps"></a>カスタム アプリケーション同期の設定の管理
+### <a name="managing-settings-synchronization-for-custom-applications"></a><a href="" id="customapps"></a>カスタム アプリケーション同期の設定の管理
 
 これらの UE-V コンポーネントを使用して、サード パーティ製アプリケーションまたは基幹アプリケーション用のカスタム テンプレートを作成して管理します。
 
@@ -113,9 +113,9 @@ Microsoft User Experience Virtualization (UE-V) 2.0 または 2.1 を実装す�
 
 
 
-![UE-V ジェネレーターのプロセス](images/ue-vgeneratorprocess.gif)
+![ue-v ジェネレーター プロセス。](images/ue-vgeneratorprocess.gif)
 
-## 既定で同期されている設定
+## <a name="settings-synchronized-by-default"></a>既定で同期されている設定
 
 
 UE-V はこれらのアプリケーションの設定を既定で同期します。 完全なリストと詳細情報については、「[UE-V 展開で自動的に同期される設定](https://technet.microsoft.com/library/dn458932.aspx#autosyncsettings)」を参照してください。
@@ -141,7 +141,7 @@ UE-V 2.1 SP1 および 2.1 の Internet Explorer 11
 
 
 
-## UE-V と他の Microsoft 製品との比較
+## <a name="compare-ue-v-to-other-microsoft-products"></a>UE-V と他の Microsoft 製品との比較
 
 
 このテーブルを使用して、UE-V と Windows 7 のプロファイルの同期、Windows 8 のプロファイルの同期、および Microsoft アカウントの PC 設定の同期機能を比較します。
@@ -281,7 +281,7 @@ UE-V 2.1 SP1 および 2.1 の Internet Explorer 11
 
 
 
-## UE-V 2.x リリース ノート
+## <a name="ue-v-2x-release-notes"></a>UE-V 2.x リリース ノート
 
 
 詳細情報とドキュメントに記載されていない最新情報については、を参照してください
@@ -292,7 +292,7 @@ UE-V 2.1 SP1 および 2.1 の Internet Explorer 11
 
 -   [Microsoft User Experience Virtualization (UE-V) 2.0 リリース ノート](microsoft-user-experience-virtualization--ue-v--20-release-notesuevv2.md)
 
-## この製品のその他のリソース
+## <a name="other-resources-for-this-product"></a>この製品のその他のリソース
 
 
 -   [UE-V 2.x の概要](get-started-with-ue-v-2x-new-uevv2.md)
@@ -305,7 +305,7 @@ UE-V 2.1 SP1 および 2.1 の Internet Explorer 11
 
 -   [UE-V 2.x のテクニカル リファレンス](technical-reference-for-ue-v-2x-both-uevv2.md)
 
-### 詳細情報
+### <a name="more-information"></a>詳細情報
 
 <a href="" id="mdop-techcenter-page"></a>[MDOP TechCenter ページ](https://go.microsoft.com/fwlink/p/?LinkId=225286)最新の MDOP 情報とリソースについて説明します。
 
